@@ -1,0 +1,59 @@
+{
+    "caseId": "2001",
+    "name": "new farmer pig",
+    "color": "#57B8DF",
+    "signal": "Textures/GameArts/CaseSignals/Hire",
+    "timeout": 30,
+    "caseContent": "Here comes a new farmer, a pig.",
+    "image": "Textures/GameArts/CaseImages/pig",
+    "imageTitle": "Pig",
+    "choosesStringList": [
+        "hire pig",
+        "leave pig away",
+        "cook this pig"
+    ],
+    "resultsList": [
+        {
+            "index": 0,
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "checkList": [
+                "Money>>100"
+            ],
+            "Pass": [
+                "MoneyDown_50",
+                "FarmerUp_Pig"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 2,
+            "checkList": [
+                "Money>>200"
+            ],
+            "Pass": [
+                "ThiefUp_Pig"
+            ],
+            "Fail": [
+                "DamagerUp_Pig"
+            ]
+        },
+        {
+            "index": 3,
+            "checkList": [
+                "Strength > 100"
+            ],
+            "Pass": [
+                "MeatUp_50",
+                "HPUp_10"
+            ],
+            "Fail": [
+                "HPDown_10"
+            ]
+        }
+    ]
+}
