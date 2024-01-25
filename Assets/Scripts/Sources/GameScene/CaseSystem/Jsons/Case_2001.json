@@ -7,22 +7,19 @@
     "caseContent": "Here comes a new farmer, a pig.",
     "image": "Textures/GameArts/CaseImages/pig",
     "imageTitle": "Pig",
-    "choosesStringList": [
-        "hire pig",
-        "leave pig away",
-        "cook this pig"
-    ],
-    "resultsList": [
+    "chooseList": [
         {
             "index": 0,
+            "text": "time out choose",
             "checkList": [],
             "Pass": [],
             "Fail": []
         },
         {
             "index": 1,
+            "text": "hire pig",
             "checkList": [
-                "Money>>100"
+                "Money_>_100"
             ],
             "Pass": [
                 "MoneyDown_50",
@@ -32,20 +29,22 @@
         },
         {
             "index": 2,
+            "text": "leave pig away",
             "checkList": [
-                "Money>>200"
+                "Money_>_200"
             ],
             "Pass": [
-                "ThiefUp_Pig"
+                "POOLADD_2002"
             ],
             "Fail": [
-                "DamagerUp_Pig"
+                "POOLADD_2003"
             ]
         },
         {
             "index": 3,
+            "text": "cook this pig",
             "checkList": [
-                "Strength > 100"
+                "Strength_>_100"
             ],
             "Pass": [
                 "MeatUp_50",
