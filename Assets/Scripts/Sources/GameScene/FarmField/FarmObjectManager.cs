@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using RoachLite.Basic;
 using UnityEngine;
 
-public class FarmObjectManager : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class FarmObjectManager : MonoSingleton<FarmObjectManager> {
+
+    private int farmObjectStartIndex;
+
+    private int ObjectIdentifier {
+        get {
+            farmObjectStartIndex++;
+            return farmObjectStartIndex - 1;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private Dictionary<int, BasePlantController> plants;
+
+    protected override void OnAwake() {
+        base.OnAwake();
+        plants = new Dictionary<int, BasePlantController>();
+    }
+
+    public void GenerateFarmPlant() {
         
     }
 }

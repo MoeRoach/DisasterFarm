@@ -41,3 +41,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3883415133
+    locked: 0
+  - name: Terrain
+    uniqueID: 2628696301
+    locked: 0
+  - name: Surface
+    uniqueID: 1874060799
+    locked: 0
+  - name: Plants
+    uniqueID: 280828579
+    locked: 0
+  - name: Pawns
+    uniqueID: 3030746231
+    locked: 0
+  - name: Overlay
+    uniqueID: 3401527695
+    locked: 0
+  - name: Foreground
+    uniqueID: 1706330679
+    locked: 0

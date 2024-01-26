@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using RoachLite.Basic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class FarmFieldRootControl : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private Tilemap groundTilemap;
+    private Tilemap fieldsTilemap;
+    private Tilemap plantsTilemap;
+
+    private FarmObjectManager objectManager;
+    private FarmPawnManager pawnManager;
+
+    protected override void OnAwake() {
+        base.OnAwake();
+        groundTilemap = FindComponent<Tilemap>("MapRoot.Ground");
+        fieldsTilemap = FindComponent<Tilemap>("MapRoot.Fields");
+        plantsTilemap = FindComponent<Tilemap>("MapRoot.Plants");
     }
 }
