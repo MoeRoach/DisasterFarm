@@ -6,7 +6,7 @@ using TMPro;
 
 public class CaseViewController : MonoBehaviour
 {
-    public CaseData data { get; set; }
+    public GameObject CurrentObj { get; set; }
     [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI content;
     [SerializeField] private TextMeshProUGUI imageTitle;
@@ -18,7 +18,16 @@ public class CaseViewController : MonoBehaviour
 
     public void ClearView()
     {
-        data = null;
+        Debug.Log($"ClearView");
+        if (CurrentObj == null)
+        {
+            Debug.Log("CurrentObj == null");
+            return;
+        }
+
+        Destroy(CurrentObj);
+
+        CurrentObj = null;
         selectIndex = -1;
         content.text = "";
         imageTitle.text = "";
@@ -29,14 +38,17 @@ public class CaseViewController : MonoBehaviour
 
     public void UpdateView()
     {
-        if (data == null)
+        if (CurrentObj == null)
         {
-            Debug.Log("data == null");
+            Debug.Log("CurrentObj == null");
             return;
         }
 
-        image.sprite = Resources.Load(data.image, typeof(Sprite)) as Sprite;
+        CaseData data = CurrentObj.GetComponent<CaseController>().Data;
+        Debug.Log(CurrentObj.GetComponent<CaseController>());
+        Debug.Log(data);
         Debug.Log(data.image);
+        image.sprite = Resources.Load(data.image, typeof(Sprite)) as Sprite;
         Debug.Log(Resources.Load(data.image, typeof(Sprite)));
         content.text = data.caseContent;
         imageTitle.text = data.imageTitle;
@@ -52,25 +64,71 @@ public class CaseViewController : MonoBehaviour
 
     void CaseTimeOut()
     {
-        //todo
+        Debug.Log($"CaseTimeOut");
+        string pass = "", fail = "";
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[0].Pass)
+        {
+            pass += str + " ";
+        }
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[0].Fail)
+        {
+            fail += str;
+        }
+        Debug.Log($"pass:[{pass}],fail:[{fail}]");
     }
 
     public void ClickBtn_1()
     {
-        //todo
+        Debug.Log($"ClickBtn_1");
+        string pass = "", fail = "";
+        // Debug.Log(CurrentObj.GetComponent<CaseController>().Data.chooseList[1]);
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[1].Pass)
+        {
+            pass += str + " ";
+        }
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[1].Fail)
+        {
+            fail += str;
+        }
+        Debug.Log($"pass:[{pass}],fail:[{fail}]");
     }
 
     public void ClickBtn_2()
     {
-        GameObject obj = Resources.Load("CaseSystemPrefabs/Case", typeof(GameObject)) as GameObject;
-        Debug.Log(obj);
-        Instantiate(obj, viewTrans);
+        Debug.Log($"ClickBtn_2");
+        string pass = "", fail = "";
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[2].Pass)
+        {
+            pass += str + " ";
+        }
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[2].Fail)
+        {
+            fail += str;
+        }
+        Debug.Log($"pass:[{pass}],fail:[{fail}]");
     }
 
     public void ClickBtn_3()
     {
-        //todo
+        Debug.Log($"ClickBtn_3");
+        string pass = "", fail = "";
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[3].Pass)
+        {
+            pass += str + " ";
+        }
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[3].Fail)
+        {
+            fail += str;
+        }
+        Debug.Log($"pass:[{pass}],fail:[{fail}]");
     }
 
-
+    public void AddCaseController(int caseId)
+    {
+        GameObject obj = Resources.Load("CaseSystemPrefabs/Case", typeof(GameObject)) as GameObject;
+        Debug.Log(obj);
+        obj = Instantiate(obj, viewTrans);
+        obj.GetComponent<CaseController>().CaseDataInit(caseId);
+        obj.GetComponent<CaseController>().View = this;
+    }
 }

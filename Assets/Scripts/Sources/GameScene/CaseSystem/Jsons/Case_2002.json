@@ -1,0 +1,51 @@
+{
+    "caseId": "2002",
+    "name": "pig go farming",
+    "color": "#F81616",
+    "signal": "Textures/GameArts/CaseSignals/Hire",
+    "timeout": 30,
+    "caseContent": "The pig is ready to farming.",
+    "image": "Textures/GameArts/CaseImages/pig",
+    "imageTitle": "Pig",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "Go, pig go.",
+            "checkList": [],
+            "Pass": [
+                "GoFarm_Pig"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 2,
+            "text": "No",
+            "checkList": [],
+            "Pass": [
+                "POOLADD_2002"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 3,
+            "text": "cook this pig",
+            "checkList": [
+                "Strength_>_100"
+            ],
+            "Pass": [
+                "MeatUp_50",
+                "HPUp_10"
+            ],
+            "Fail": [
+                "HPDown_10"
+            ]
+        }
+    ]
+}

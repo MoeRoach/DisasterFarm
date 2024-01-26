@@ -223,5 +223,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75247aafb4e606c4d8a2df512be0eccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  view: {fileID: 0}
-  BG: {fileID: 8250067833827717990}
+  Data:
+    caseId: 2001
+    name: new farmer pig
+    color: '#57B8DF'
+    signal: Textures/GameArts/CaseSignals/Hire
+    timeout: 30
+    caseContent: Here comes a new farmer, a pig.
+    image: Textures/GameArts/CaseImages/pig
+    imageTitle: Pig
+    chooseList:
+    - index: 0
+      text: time out choose
+      checkList: []
+      Pass: []
+      Fail: []
+    - index: 1
+      text: hire pig
+      checkList:
+      - Money_>_100
+      Pass:
+      - MoneyDown_50
+      - FarmerUp_Pig
+      Fail: []
+    - index: 2
+      text: leave pig away
+      checkList:
+      - Money_>_200
+      Pass:
+      - POOLADD_2002
+      Fail:
+      - POOLADD_2003
+    - index: 3
+      text: cook this pig
+      checkList:
+      - Strength_>_100
+      Pass:
+      - MeatUp_50
+      - HPUp_10
+      Fail:
+      - HPDown_10
+  View: {fileID: 0}

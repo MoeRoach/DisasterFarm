@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,23 +10,36 @@ using TMPro;
 public class CaseController : MonoBehaviour
 {
 
-    private CaseData data;
-    [SerializeField] private CaseViewController view;
-    [SerializeField] private Image BG;
+    public CaseData Data;
+    public CaseViewController View;
+    private Image BG;
+    private float timer = 0;
 
     public void ClearInfo()
     {
-        data = null;
+        Debug.Log($"ClearInfo");
+        Data = null;
     }
 
     void Start()
     {
-        CaseDataInit(2001);
+
     }
 
     void Update()
     {
+        TimeOutProcess();
+    }
 
+    void TimeOutProcess()
+    {
+        timer += Time.deltaTime;
+        GetComponent<Image>().fillAmount = 1.0f - Mathf.Lerp(0, 1, timer / Data.timeout);
+        if (GetComponent<Image>().fillAmount <= 0)
+        {
+            View.ClearView();
+            Destroy(gameObject);
+        }
     }
 
     public void CaseDataInit(int caseId)
@@ -38,21 +52,29 @@ public class CaseController : MonoBehaviour
             Debug.Log("string.IsNullOrEmpty(fileContent)");
             return;
         }
-        data = JsonUtility.FromJson<CaseData>(fileContent);
-        ColorUtility.TryParseHtmlString(data.color, out Color color);
-        BG.color = color;
+        Data = JsonUtility.FromJson<CaseData>(fileContent);
+        Debug.Log(Data.color);
+        ColorUtility.TryParseHtmlString(Data.color, out Color color);
+        GetComponent<Image>().color = color;
     }
 
 
     public void Click()
     {
         Debug.Log("Click");
-        if (view == null)
+        if (View == null)
         {
-            Debug.Log("view == null");
+            Debug.Log("View == null");
             return;
         }
-        view.data = data;
-        view.UpdateView();
+        if (Data == null)
+        {
+            Debug.Log("Data == null");
+            return;
+        }
+        View.CurrentObj = gameObject;
+        View.UpdateView();
+        // Debug.Log($"add case {gameObject.GetComponent<CaseController>().Data.caseId}");
+        // Debug.Log($"add case {View.CurrentObj.GetComponent<CaseController>().Data.caseId}");
     }
 }
