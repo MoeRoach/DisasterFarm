@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f0e5d3d605116438e78e520dc6f8a9, type: 3}
+  m_Name: SDB_CaseImages
+  m_EditorClassIdentifier: 
+  databaseName: CaseImages
+  groupNames:
+  - Pig
+  - Bird
+  - Cow
+  - Grass
+  - Hat
+  - Mouse
+  - Witch
+  spriteGroups:
+  - groupName: Pig
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: pig
+      spriteObject: {fileID: 21300000, guid: 3a100e92c45fc6040887ade056814090, type: 3}
+    isExpanded: 0
+  - groupName: Bird
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: bird
+      spriteObject: {fileID: 21300000, guid: 1f5637a18e458fa48bce0717ec84d7ee, type: 3}
+    isExpanded: 0
+  - groupName: Cow
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: cow
+      spriteObject: {fileID: 21300000, guid: 139c56dc5425a2043a8a3ac017c7357c, type: 3}
+    isExpanded: 0
+  - groupName: Grass
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: grass
+      spriteObject: {fileID: 21300000, guid: e47b855340eb9d24d831ea235311d483, type: 3}
+    isExpanded: 0
+  - groupName: Hat
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: hat
+      spriteObject: {fileID: 21300000, guid: 7dd1695bdc41d3f4e8fad2e355b5734e, type: 3}
+    isExpanded: 0
+  - groupName: Mouse
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: mouse
+      spriteObject: {fileID: 21300000, guid: be0363ac295fa7f47b3cae3f645b15c4, type: 3}
+    isExpanded: 0
+  - groupName: Witch
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: witch
+      spriteObject: {fileID: 21300000, guid: 5bda8de2d172f424a8c48e5c173b179e, type: 3}
+    isExpanded: 0
+  isExpanded: 1

@@ -3,14 +3,20 @@ using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using RoachLite.Basic;
+using RoachLite.Data;
 using UnityEngine;
 // Created By Yu.Liu
 public abstract class BasePawnController : BaseObject {
 
 	public int Id { get; protected set; }
+	public virtual Square Coord => MapUtils.WorldToSquare(transform.position);
 	
 	protected SpriteRenderer avatarSprite;
 	protected Animator avatarAnimator;
+	
+	private FarmDataService dataService;
+	private FarmObjectManager objectManager;
+	private FarmPawnManager pawnManager;
 
 	protected Queue<PawnCommand> commandQueue;
 	protected List<AsyncCommandRunner> runnerList;
@@ -25,6 +31,9 @@ public abstract class BasePawnController : BaseObject {
 
 	protected override void OnStart() {
 		base.OnStart();
+		dataService = FarmDataService.Instance;
+		objectManager = FarmObjectManager.Instance;
+		pawnManager = FarmPawnManager.Instance;
 		RegisterUpdateFunction(1, UpdateCommandQueue);
 	}
 
@@ -55,9 +64,114 @@ public abstract class BasePawnController : BaseObject {
 	}
 
 	protected virtual async UniTask OnCommandExecute(AsyncCommandRunner runner) {
-		await UniTask.CompletedTask;
+		switch (runner.cmd.cmd) {
+			case PawnCommand.CMD_STR_MOVE:
+				await ExecuteMove(runner);
+				break;
+			case PawnCommand.CMD_STR_PLANT:
+				await ExecutePlant(runner);
+				break;
+			case PawnCommand.CMD_STR_HARVEST:
+				await ExecuteHarvest(runner);
+				break;
+			case PawnCommand.CMD_STR_ATTACK:
+				await ExecuteAttack(runner);
+				break;
+			case PawnCommand.CMD_STR_HIDE:
+				await ExecuteHide(runner);
+				break;
+			case PawnCommand.CMD_STR_SHOW:
+				await ExecuteShow(runner);
+				break;
+		}
 	}
 
+	protected virtual async UniTask ExecuteMove(AsyncCommandRunner runner) {
+		var target = runner.cmd.GetVector3(PawnCommand.CMD_ARG_KEY_TARGET_POSITION);
+		var spd = runner.cmd.GetFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED);
+		var timer = 0f;
+		var start = transform.position;
+		while (timer < 1f) {
+			timer += Time.deltaTime * spd;
+			transform.position = Vector3.Lerp(start, target, timer);
+			await UniTask.Yield();
+			if (runner.isCanceled) return;
+		}
+	}
+	
+
+	protected virtual async UniTask ExecutePlant(AsyncCommandRunner runner) {
+		var serial = runner.cmd.GetInteger(PawnCommand.CMD_ARG_KEY_PLANT_SERIAL);
+		var duration = runner.cmd.GetFloat(PawnCommand.CMD_ARG_KEY_TIME_DURATION);
+		var timer = 0f;
+		DoPlant(serial);
+		while (timer < duration) {
+			timer += Time.deltaTime;
+			await UniTask.Yield();
+			if (runner.isCanceled) return;
+		}
+	}
+	
+	protected virtual void DoPlant(int ps) { }
+	
+	protected virtual async UniTask ExecuteHarvest(AsyncCommandRunner runner) {
+		var pid = runner.cmd.GetInteger(PawnCommand.CMD_ARG_KEY_PLANT_IDENTIFIER);
+		var duration = runner.cmd.GetFloat(PawnCommand.CMD_ARG_KEY_TIME_DURATION);
+		var timer = 0f;
+		DoHarvest(pid);
+		while (timer < duration) {
+			timer += Time.deltaTime;
+			await UniTask.Yield();
+			if (runner.isCanceled) return;
+		}
+	}
+	
+	protected virtual void DoHarvest(int pid) { }
+
+	protected virtual async UniTask ExecuteAttack(AsyncCommandRunner runner) {
+		var preDelay = 0.2f;
+		var postDelay = 0.2f;
+		var timer = 0f;
+		while (timer < preDelay) {
+			timer += Time.deltaTime;
+			await UniTask.Yield();
+			if (runner.isCanceled) return;
+		}
+
+		DoAttack();
+		while (!CheckAttackDone()) {
+			await UniTask.Yield();
+			if (runner.isCanceled) return;
+		}
+
+		timer = 0f;
+		while (timer < postDelay) {
+			timer += Time.deltaTime;
+			await UniTask.Yield();
+			if (runner.isCanceled) return;
+		}
+	}
+	
+	protected virtual void DoAttack() { }
+
+	protected virtual bool CheckAttackDone() {
+		return true;
+	}
+
+	protected virtual async UniTask ExecuteHide(AsyncCommandRunner runner) {
+		DoHide();
+		await UniTask.Yield();
+	}
+	
+	protected virtual void DoHide() { }
+
+	protected virtual async UniTask ExecuteShow(AsyncCommandRunner runner) {
+		DoShow();
+		await UniTask.Yield();
+	}
+	
+	protected virtual void DoShow() { }
+	
 	private async void ExecuteCommand(AsyncCommandRunner runner) {
 		runner.isExecute = true;
 		runnerList.Insert(0, runner);

@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cab5b4e42381a24f9e35dd8b9f211e3, type: 3}
+  m_Name: TPL_FarmTiles
+  m_EditorClassIdentifier: 
+  paletteName: FarmTiles
+  groupNames:
+  - Grass
+  - Fence
+  - Ground
+  - Fields
+  tilesGroups:
+  - groupName: Grass
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      tileName: grass_0
+      tileObject: {fileID: 11400000, guid: 2faa43c6bf2705b48944c352128f079f, type: 2}
+    - dataName: "\u7F16\u53F7(1)"
+      tileName: grass_1
+      tileObject: {fileID: 11400000, guid: 36d31d36eef614f43bec7932380250bb, type: 2}
+    - dataName: "\u7F16\u53F7(2)"
+      tileName: grass_2
+      tileObject: {fileID: 11400000, guid: 5887474ac0020784fa38b2c2e8239950, type: 2}
+    - dataName: "\u7F16\u53F7(3)"
+      tileName: grass_3
+      tileObject: {fileID: 11400000, guid: bde0460f3435b94418dc8f59bab67342, type: 2}
+    - dataName: "\u7F16\u53F7(4)"
+      tileName: grass_4
+      tileObject: {fileID: 11400000, guid: da61825c27fe1ff4cbd263a743762fce, type: 2}
+    - dataName: "\u7F16\u53F7(5)"
+      tileName: grass_5
+      tileObject: {fileID: 11400000, guid: d82a4d8eaad72164ba39aff0c692637a, type: 2}
+    - dataName: "\u7F16\u53F7(6)"
+      tileName: grass_6
+      tileObject: {fileID: 11400000, guid: 8848cc75d0a767d41a2bb8f233eef33b, type: 2}
+    - dataName: "\u7F16\u53F7(7)"
+      tileName: grass_7
+      tileObject: {fileID: 11400000, guid: 44f276408046918458f9f33c5b8996f3, type: 2}
+    - dataName: "\u7F16\u53F7(8)"
+      tileName: grass_8
+      tileObject: {fileID: 11400000, guid: cd1d0c610f6292d419b66e2d0fabe8dd, type: 2}
+    - dataName: "\u7F16\u53F7(9)"
+      tileName: grass_9
+      tileObject: {fileID: 11400000, guid: 05176d037c0fa3e4f97cac8da635d409, type: 2}
+    isExpanded: 0
+  - groupName: Fence
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      tileName: fence_0
+      tileObject: {fileID: 11400000, guid: 6c563ddfc66738a4f835cce55ab3710c, type: 2}
+    - dataName: "\u7F16\u53F7(1)"
+      tileName: fence_1
+      tileObject: {fileID: 11400000, guid: 2fe58f70ed7f84a4ca42917f58d96620, type: 2}
+    - dataName: "\u7F16\u53F7(2)"
+      tileName: fence_2
+      tileObject: {fileID: 11400000, guid: d4d4ab23a20f2c94d9eca8390e487453, type: 2}
+    - dataName: "\u7F16\u53F7(3)"
+      tileName: fence_3
+      tileObject: {fileID: 11400000, guid: f3d05ab0d23e23c4fba7d0cb94ef8a12, type: 2}
+    - dataName: "\u7F16\u53F7(4)"
+      tileName: fence_4
+      tileObject: {fileID: 11400000, guid: d0bd3ac28a5779f4ca5622ca3502fc8f, type: 2}
+    - dataName: "\u7F16\u53F7(5)"
+      tileName: fence_5
+      tileObject: {fileID: 11400000, guid: 44617d32a19ba60459c559a766b014d4, type: 2}
+    - dataName: "\u7F16\u53F7(6)"
+      tileName: fence_6
+      tileObject: {fileID: 11400000, guid: e90512f9ffb197949aafea5d28463110, type: 2}
+    - dataName: "\u7F16\u53F7(7)"
+      tileName: fence_7
+      tileObject: {fileID: 11400000, guid: d5ae1d2dc5c165d4a9f77fab6ebfaf95, type: 2}
+    isExpanded: 0
+  - groupName: Ground
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      tileName: grounds_0
+      tileObject: {fileID: 11400000, guid: 0cb3b5c47fb40d843906715c005e5e15, type: 2}
+    - dataName: "\u7F16\u53F7(1)"
+      tileName: grounds_1
+      tileObject: {fileID: 11400000, guid: d987275f24537c449857617927d88fc4, type: 2}
+    - dataName: "\u7F16\u53F7(2)"
+      tileName: grounds_2
+      tileObject: {fileID: 11400000, guid: 5ab64f648163be74b8f6512993492fa6, type: 2}
+    - dataName: "\u7F16\u53F7(3)"
+      tileName: grounds_3
+      tileObject: {fileID: 11400000, guid: 0e4addd0b6897c6448c329e5f1feed9a, type: 2}
+    - dataName: "\u7F16\u53F7(4)"
+      tileName: grounds_4
+      tileObject: {fileID: 11400000, guid: 788ebb974c5c02041ac1531419eaa1ad, type: 2}
+    - dataName: "\u7F16\u53F7(5)"
+      tileName: grounds_5
+      tileObject: {fileID: 11400000, guid: 256e172bb6ba71c49aeafff048899b38, type: 2}
+    - dataName: "\u7F16\u53F7(6)"
+      tileName: grounds_6
+      tileObject: {fileID: 11400000, guid: e70cbf77db19b3d458c65be3ce7b9906, type: 2}
+    - dataName: "\u7F16\u53F7(7)"
+      tileName: grounds_7
+      tileObject: {fileID: 11400000, guid: 775f536aa4fa7fa4b9bb7ed779d84890, type: 2}
+    - dataName: "\u7F16\u53F7(8)"
+      tileName: grounds_8
+      tileObject: {fileID: 11400000, guid: 461fa3e77977aae449a20ae85beb784e, type: 2}
+    isExpanded: 0
+  - groupName: Fields
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      tileName: fields_0
+      tileObject: {fileID: 11400000, guid: 6f89d8e740b59ef42ae1ebaff7821fa9, type: 2}
+    - dataName: "\u7F16\u53F7(1)"
+      tileName: fields_1
+      tileObject: {fileID: 11400000, guid: 8e035b5924b303f4884a44fc120675e8, type: 2}
+    - dataName: "\u7F16\u53F7(2)"
+      tileName: fields_2
+      tileObject: {fileID: 11400000, guid: 20fbec082a74a044b89f61a4186b51ba, type: 2}
+    - dataName: "\u7F16\u53F7(3)"
+      tileName: fields_3
+      tileObject: {fileID: 11400000, guid: 9235b8f66b1e004419f8a532a3a52784, type: 2}
+    isExpanded: 0
+  isExpanded: 1

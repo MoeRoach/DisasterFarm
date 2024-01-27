@@ -15,22 +15,23 @@ public class FarmPawnManager : MonoSingleton<FarmPawnManager> {
     }
 
     private Dictionary<int, BasePawnController> pawns;
-
+    private Dictionary<string, int> pawnNameToId;
     private HashSet<int> playerPawns;
     private HashSet<int> enemyPawns;
 
     protected override void OnAwake() {
         base.OnAwake();
         pawns = new Dictionary<int, BasePawnController>();
+        pawnNameToId = new Dictionary<string, int>();
         playerPawns = new HashSet<int>();
         enemyPawns = new HashSet<int>();
     }
 
-    public void GeneratePlayerPawn() {
+    public void GeneratePlayerPawn(string pn) {
         
     }
 
-    public void GenerateEnemyPawn() {
+    public void GenerateEnemyPawn(string pn) {
         
     }
 }

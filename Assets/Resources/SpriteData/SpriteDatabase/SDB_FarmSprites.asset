@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f0e5d3d605116438e78e520dc6f8a9, type: 3}
+  m_Name: SDB_FarmSprites
+  m_EditorClassIdentifier: 
+  databaseName: FarmSprites
+  groupNames:
+  - Plants
+  - House
+  - Pool
+  spriteGroups:
+  - groupName: Plants
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: fields_0
+      spriteObject: {fileID: 268896883, guid: 6c9bb970aa2c0f541a693470b0751775, type: 3}
+    - dataName: "\u7F16\u53F7(1)"
+      spriteName: fields_1
+      spriteObject: {fileID: 449651585, guid: 6c9bb970aa2c0f541a693470b0751775, type: 3}
+    - dataName: "\u7F16\u53F7(2)"
+      spriteName: fields_2
+      spriteObject: {fileID: -1897792670, guid: 6c9bb970aa2c0f541a693470b0751775, type: 3}
+    - dataName: "\u7F16\u53F7(3)"
+      spriteName: fields_3
+      spriteObject: {fileID: 356752989, guid: 6c9bb970aa2c0f541a693470b0751775, type: 3}
+    isExpanded: 0
+  - groupName: House
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: house
+      spriteObject: {fileID: 21300000, guid: 89741f0fc48f831469d55f802cea9855, type: 3}
+    isExpanded: 0
+  - groupName: Pool
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: pool
+      spriteObject: {fileID: 21300000, guid: 7ec5276ab8a15f746a4289c55b491465, type: 3}
+    isExpanded: 0
+  isExpanded: 1
