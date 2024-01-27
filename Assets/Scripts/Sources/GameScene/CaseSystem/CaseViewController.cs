@@ -13,8 +13,9 @@ public class CaseViewController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buttonText_1;
     [SerializeField] private TextMeshProUGUI buttonText_2;
     [SerializeField] private TextMeshProUGUI buttonText_3;
-    private int selectIndex;
+    // private int selectIndex;
     [SerializeField] private Transform viewTrans;
+    [SerializeField] private CaseManager caseManager;
 
     public void ClearView()
     {
@@ -28,7 +29,7 @@ public class CaseViewController : MonoBehaviour
         Destroy(CurrentObj);
 
         CurrentObj = null;
-        selectIndex = -1;
+        // selectIndex = -1;
         content.text = "";
         imageTitle.text = "";
         buttonText_1.text = "";
@@ -45,11 +46,11 @@ public class CaseViewController : MonoBehaviour
         }
 
         CaseData data = CurrentObj.GetComponent<CaseController>().Data;
-        Debug.Log(CurrentObj.GetComponent<CaseController>());
-        Debug.Log(data);
-        Debug.Log(data.image);
+        // Debug.Log(CurrentObj.GetComponent<CaseController>());
+        // Debug.Log(data);
+        // Debug.Log(data.image);
         image.sprite = Resources.Load(data.image, typeof(Sprite)) as Sprite;
-        Debug.Log(Resources.Load(data.image, typeof(Sprite)));
+        // Debug.Log(Resources.Load(data.image, typeof(Sprite)));
         content.text = data.caseContent;
         imageTitle.text = data.imageTitle;
         buttonText_1.text = data.chooseList[1].text;
@@ -65,62 +66,101 @@ public class CaseViewController : MonoBehaviour
     void CaseTimeOut()
     {
         Debug.Log($"CaseTimeOut");
-        string pass = "", fail = "";
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[0].Pass)
-        {
-            pass += str + " ";
-        }
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[0].Fail)
-        {
-            fail += str;
-        }
-        Debug.Log($"pass:[{pass}],fail:[{fail}]");
+        ParseChoose(0);
     }
 
     public void ClickBtn_1()
     {
         Debug.Log($"ClickBtn_1");
-        string pass = "", fail = "";
-        // Debug.Log(CurrentObj.GetComponent<CaseController>().Data.chooseList[1]);
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[1].Pass)
-        {
-            pass += str + " ";
-        }
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[1].Fail)
-        {
-            fail += str;
-        }
-        Debug.Log($"pass:[{pass}],fail:[{fail}]");
+        ParseChoose(1);
     }
 
     public void ClickBtn_2()
     {
         Debug.Log($"ClickBtn_2");
-        string pass = "", fail = "";
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[2].Pass)
-        {
-            pass += str + " ";
-        }
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[2].Fail)
-        {
-            fail += str;
-        }
-        Debug.Log($"pass:[{pass}],fail:[{fail}]");
+        ParseChoose(2);
     }
 
     public void ClickBtn_3()
     {
         Debug.Log($"ClickBtn_3");
+        ParseChoose(3);
+    }
+
+    void ParseChoose(int index)
+    {
+        caseManager.CaseList.Remove(CurrentObj.GetComponent<CaseController>().Data.caseId);
+
         string pass = "", fail = "";
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[3].Pass)
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[index].Pass)
         {
             pass += str + " ";
+            ParseAction(str);
         }
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[3].Fail)
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[index].Fail)
         {
             fail += str;
+            ParseAction(str);
         }
         Debug.Log($"pass:[{pass}],fail:[{fail}]");
+    }
+
+    public void UpdateFromCaseList()
+    {
+        Debug.Log($"UpdateFromCaseList");
+        Transform[] childTransforms = gameObject.GetComponentsInChildren<Transform>();
+        if (childTransforms.Length <= 0)
+        {
+            Debug.Log($"childTransforms.Length <= 0");
+            return;
+        }
+
+        CurrentObj = childTransforms[0].gameObject;
+        UpdateView();
+    }
+
+    void ParseAction(string str)
+    {
+        string[] result = str.Split("_");
+        if (result.Length < 2)
+        {
+            Debug.Log("result.Length < 2");
+            return;
+        }
+        switch (result[0])
+        {
+            // case issue
+            case "ListAdd":
+                Debug.Log($"ListAdd {result[1]}");
+                break;
+            case "PoolAdd":
+                Debug.Log($"PoolAdd {result[1]}");
+                break;
+            // attributes issue
+            case "MoneyUp":
+                Debug.Log($"MoneyUp {result[1]}");
+                break;
+            case "MoneyDown":
+                Debug.Log($"MoneyDown {result[1]}");
+                break;
+            // action issue
+            case "GoFarm":
+                Debug.Log($"GoFarm {result[1]}");
+                break;
+            case "GoAttack":
+                Debug.Log($"GoAttack {result[1]}");
+                break;
+            case "ThiefCome":
+                Debug.Log($"ThiefCome {result[1]}");
+                break;
+            case "DamagerCome":
+                Debug.Log($"DamagerCome {result[1]}");
+                break;
+            default:
+                Debug.Log("default");
+                break;
+        }
+
     }
 
     public void AddCaseController(int caseId)

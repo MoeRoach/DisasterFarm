@@ -1,0 +1,46 @@
+{
+    "caseId": "2000",
+    "name": "test",
+    "color": "#57B8DF",
+    "signal": "Textures/GameArts/CaseSignals/Hire",
+    "timeout": 30,
+    "caseContent": "test test test.",
+    "image": "Textures/GameArts/CaseImages/pig",
+    "imageTitle": "Pig",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "GoFarm_Pig",
+            "checkList": [],
+            "Pass": [
+                "GoFarm_Pig"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 2,
+            "text": "GoAttack_Pig",
+            "checkList": [],
+            "Pass": [
+                "GoAttack_Pig"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 3,
+            "text": "ThiefCome_Pig",
+            "checkList": [],
+            "Pass": [
+                "ThiefCome_Pig"
+            ],
+            "Fail": []
+        }
+    ]
+}
