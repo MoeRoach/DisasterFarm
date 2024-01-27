@@ -1,4 +1,4 @@
-﻿// File create date:2024/1/26
+﻿// File create date:2024/1/27
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -6,29 +6,22 @@ using RoachLite.Basic;
 using RoachLite.Data;
 using UnityEngine;
 // Created By Yu.Liu
-public abstract class BasePlantController : BaseObject {
+public abstract class BaseFarmObject : BaseObject  {
 	
 	public int Id { get; protected set; }
 	public Square Coord { get; protected set; }
+	public Square Area { get; protected set; }
 
 	protected SpriteRenderer avatarSprite;
-	protected Animator avatarAnimator;
-	
-	private FarmDataService dataService;
-	private FarmObjectManager objectManager;
-	private FarmPawnManager pawnManager;
 
 	protected override void OnAwake() {
 		base.OnAwake();
 		avatarSprite = FindComponent<SpriteRenderer>("Avatar");
-		avatarAnimator = avatarSprite.GetComponent<Animator>();
 	}
 
 	protected override void OnStart() {
 		base.OnStart();
-		dataService = FarmDataService.Instance;
-		objectManager = FarmObjectManager.Instance;
-		pawnManager = FarmPawnManager.Instance;
+		InitObjectArea();
 		Coord = MapUtils.WorldToSquare(transform.position);
 	}
 
@@ -38,18 +31,29 @@ public abstract class BasePlantController : BaseObject {
 
 	protected override void OnLazyLoad() {
 		base.OnLazyLoad();
-		FarmObjectManager.Instance.RegisterPlant(this);
+		UpdateAvatarPosition();
+		FarmObjectManager.Instance.RegisterObject(this);
 	}
 
-	public async void SetupCoordinate(Square sq) {
+	protected virtual void InitObjectArea() {
+		Area = Square.One;
+	}
+
+	protected virtual void UpdateAvatarPosition() {
+		var offset = Vector3.zero;
+		offset.x = (Area.x - 1) / 2f;
+		offset.y = (Area.y - 1) / 2f;
+		transform.localPosition += offset;
+	}
+
+	public async void SetupCoordinate(Square coord) {
 		await UniTask.Yield();
-		transform.position = MapUtils.SquareToWorld(sq);
-		Coord = sq;
-		FarmObjectManager.Instance.UpdatePlantMap(this);
+		transform.position = MapUtils.SquareToWorld(coord);
+		Coord = coord;
 	}
 
 	protected override void Release() {
 		base.Release();
-		FarmObjectManager.Instance.UnregisterPlant(this);
+		FarmObjectManager.Instance.UnregisterObject(this);
 	}
 }

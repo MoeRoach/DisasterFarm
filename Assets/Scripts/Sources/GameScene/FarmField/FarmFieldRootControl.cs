@@ -102,7 +102,8 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
                         tile.structure = MapUtils.FENCE_INDEX_TOP;
                     } else {
                         tile.structure = -1;
-                        if (x == -9) {
+                        if (x < -6 || x > 6) continue;
+                        if (x == -6) {
                             if (y == -5) {
                                 tile.ground = MapUtils.GROUND_INDEX_LEFT_BOT;
                             } else if (y == 5) {
@@ -110,7 +111,7 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
                             } else {
                                 tile.ground = MapUtils.GROUND_INDEX_LEFT;
                             }
-                        } else if (x == 9) {
+                        } else if (x == 6) {
                             if (y == -5) {
                                 tile.ground = MapUtils.GROUND_INDEX_RIGHT_BOT;
                             } else if (y == 5) {
@@ -141,6 +142,12 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
 
         await UniTask.Yield();
         // 生成物体
+        var hq = new Square(-9, 3);
+        FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_HOUSE, hq);
+        for (var py = -5; py <= 5; py++) {
+            var pq = new Square(7, py);
+            FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, pq);
+        }
     }
     
     private void GenerateInitPawn() {
@@ -162,12 +169,14 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
 
         if (tile.ground >= 0) {
             var gs = MapUtils.GetGroundTile(tile.ground);
-            
+            groundTilemap.SetTile(coord, gs);
         }
+    }
 
-        if (tile.field == 0) return;
-        var fs = MapUtils.GetGroundTile(tile.field);
-        fieldsTilemap.SetTile(coord, fs);
+    public void ApplyFieldTile(int x, int y, int s) {
+        var coord = MapUtils.SquareToCoordinate(x, y);
+        var tile = MapUtils.GetFieldTile(s);
+        fieldsTilemap.SetTile(coord, tile);
     }
 
     public void DispatchOperation(string op) {

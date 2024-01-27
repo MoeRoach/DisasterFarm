@@ -53,6 +53,7 @@ public static class MapUtils {
 	public const string TILE_GROUP_GRASS = "Grass";
 	public const string TILE_GROUP_FENCE = "Fence";
 	public const string TILE_GROUP_GROUND = "Ground";
+	public const string TILE_GROUP_FIELDS = "Fields";
 
 	public static TileBase GetGrassTile() {
 		return TilesManager.Instance.GetTile(TDB_FARM_TILES, TILE_GROUP_GRASS);
@@ -64,6 +65,10 @@ public static class MapUtils {
 	
 	public static TileBase GetGroundTile(int i) {
 		return TilesManager.Instance.GetTile(TDB_FARM_TILES, TILE_GROUP_GROUND, i);
+	}
+
+	public static TileBase GetFieldTile(int i) {
+		return TilesManager.Instance.GetTile(TDB_FARM_TILES, TILE_GROUP_FIELDS, i);
 	}
 
 	#endregion

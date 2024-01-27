@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324cdcb016b23b346beb2a58f17cb401, type: 3}
+  m_Name: PDB_FarmPlants
+  m_EditorClassIdentifier: 
+  databaseName: FarmPlants
+  groupNames:
+  - PlantBerry
+  - PlantBush
+  - PlantCarrot
+  - PlantFruit
+  prefabGroups:
+  - groupName: PlantBerry
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      prefabName: PlantBerry
+      prefabObject: {fileID: 4017912602217676268, guid: a5d54aa34187f6d4b88d1aff415c691c, type: 3}
+    isExpanded: 0
+  - groupName: PlantBush
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      prefabName: PlantBush
+      prefabObject: {fileID: 1942766683918979930, guid: 1217970af3da29c4d9a27206d011d3ef, type: 3}
+    isExpanded: 0
+  - groupName: PlantCarrot
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      prefabName: PlantCarrot
+      prefabObject: {fileID: 1038020078822554435, guid: c8deda79134cf3c47b148ec952a45d3f, type: 3}
+    isExpanded: 0
+  - groupName: PlantFruit
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      prefabName: PlantFruit
+      prefabObject: {fileID: 2194721059837526484, guid: e73da54360d39344caa56fb8ce4ab240, type: 3}
+    isExpanded: 0
+  isExpanded: 1
