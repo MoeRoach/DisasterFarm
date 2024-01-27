@@ -2,10 +2,10 @@
     "caseId": "2002",
     "name": "pig go farming",
     "color": "#F81616",
-    "signal": "Textures/GameArts/CaseSignals/Hire",
+    "signal": "Farm",
     "timeout": 30,
     "caseContent": "The pig is ready to farming.",
-    "image": "Textures/GameArts/CaseImages/pig",
+    "image": "Pig",
     "imageTitle": "Pig",
     "chooseList": [
         {

@@ -35,6 +35,7 @@ public class CaseViewController : MonoBehaviour
         buttonText_1.text = "";
         buttonText_2.text = "";
         buttonText_3.text = "";
+        image.sprite = null;
     }
 
     public void UpdateView()
@@ -48,9 +49,10 @@ public class CaseViewController : MonoBehaviour
         CaseData data = CurrentObj.GetComponent<CaseController>().Data;
         // Debug.Log(CurrentObj.GetComponent<CaseController>());
         // Debug.Log(data);
-        // Debug.Log(data.image);
-        image.sprite = Resources.Load(data.image, typeof(Sprite)) as Sprite;
-        // Debug.Log(Resources.Load(data.image, typeof(Sprite)));
+        Debug.Log(data.image);
+        SpriteUtils.GetCaseImageSprite(data.image);
+        image.sprite = SpriteUtils.GetCaseImageSprite(data.image);
+        Debug.Log(image.sprite);
         content.text = data.caseContent;
         imageTitle.text = data.imageTitle;
         buttonText_1.text = data.chooseList[1].text;
@@ -97,11 +99,11 @@ public class CaseViewController : MonoBehaviour
             pass += str + " ";
             ParseAction(str);
         }
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[index].Fail)
-        {
-            fail += str;
-            ParseAction(str);
-        }
+        // foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[index].Fail)
+        // {
+        //     fail += str;
+        //     ParseAction(str);
+        // }
         Debug.Log($"pass:[{pass}],fail:[{fail}]");
     }
 
@@ -146,15 +148,19 @@ public class CaseViewController : MonoBehaviour
             // action issue
             case "GoFarm":
                 Debug.Log($"GoFarm {result[1]}");
+                FarmFieldRootControl.Instance.DispatchOperation(str);
                 break;
             case "GoAttack":
                 Debug.Log($"GoAttack {result[1]}");
+                FarmFieldRootControl.Instance.DispatchOperation(str);
                 break;
             case "ThiefCome":
                 Debug.Log($"ThiefCome {result[1]}");
+                FarmFieldRootControl.Instance.DispatchOperation(str);
                 break;
             case "DamagerCome":
                 Debug.Log($"DamagerCome {result[1]}");
+                FarmFieldRootControl.Instance.DispatchOperation(str);
                 break;
             default:
                 Debug.Log("default");
@@ -163,12 +169,14 @@ public class CaseViewController : MonoBehaviour
 
     }
 
-    public void AddCaseController(int caseId)
+    public GameObject AddCaseController(int caseId)
     {
         GameObject obj = Resources.Load("CaseSystemPrefabs/Case", typeof(GameObject)) as GameObject;
         Debug.Log(obj);
         obj = Instantiate(obj, viewTrans);
         obj.GetComponent<CaseController>().CaseDataInit(caseId);
         obj.GetComponent<CaseController>().View = this;
+
+        return obj;
     }
 }

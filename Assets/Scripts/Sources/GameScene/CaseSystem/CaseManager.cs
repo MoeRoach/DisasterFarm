@@ -2,6 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RoachLite;
+using RoachLite.Common;
+using RoachLite.Services;
+using RoachLite.Services.Broadcast;
+using RoachLite.Services.Message;
 
 public class CaseManager : MonoBehaviour
 {
@@ -10,11 +15,17 @@ public class CaseManager : MonoBehaviour
     public List<int> CaseList;
     public List<int> CasePool;
 
+    private void Awake()
+    {
+        RoachLite.UniverseController.Initialize();
+    }
+
     void Start()
     {
         // init caseSystem
         CaseList.Add(2000);
-        view.AddCaseController(2000);
+        view.CurrentObj = view.AddCaseController(2000);
+        view.UpdateView();
 
         CaseList = new List<int>();
         CasePool = new List<int>();

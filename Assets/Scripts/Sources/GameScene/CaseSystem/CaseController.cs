@@ -13,6 +13,7 @@ public class CaseController : MonoBehaviour
     public CaseData Data;
     public CaseViewController View;
     private Image BG;
+    [SerializeField] Image signal;
     private float timer = 0;
 
     public void ClearInfo()
@@ -56,6 +57,8 @@ public class CaseController : MonoBehaviour
         Debug.Log(Data.color);
         ColorUtility.TryParseHtmlString(Data.color, out Color color);
         GetComponent<Image>().color = color;
+
+        signal.sprite = SpriteUtils.GetCaseSignalSprite(Data.signal);
     }
 
 
