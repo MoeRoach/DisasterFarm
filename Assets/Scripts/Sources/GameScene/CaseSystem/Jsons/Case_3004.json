@@ -1,0 +1,53 @@
+{
+    "caseId": "3004",
+    "name": "rat have a plan",
+    "color": "#DB4142",
+    "signal": "Fight",
+    "timeout": 30,
+    "caseContent": "your old pal rat have a plan ...do you want to join?",
+    "image": "Mouse",
+    "imageTitle": "rat",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "I will love to join (become a coin artist)",
+            "checkList": [
+                "Charisma_>=_50"
+            ],
+            "Pass": [
+                "MoneyUp_500"
+            ],
+            "Fail": [
+                "HPDown_10",
+                "MoneyDown_50"
+            ]
+        },
+        {
+            "index": 2,
+            "text": "oh..I have a plan for you(betray him)",
+            "checkList": [
+                "Fame_>=_75"
+            ],
+            "Pass": [
+                "MoneyUp_1000"
+            ],
+            "Fail": [
+                "MoneyDown_All"
+            ]
+        },
+        {
+            "index": 3,
+            "text": "no!I am a decent person! (you don't have gut to do it)",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        }
+    ]
+}

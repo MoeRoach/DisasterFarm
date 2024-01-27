@@ -1,0 +1,57 @@
+{
+    "caseId": "3002",
+    "name": "rat need money",
+    "color": "#DB4142",
+    "signal": "Fight",
+    "timeout": 30,
+    "caseContent": "A skinny rat want you give him money for...nothing!.",
+    "image": "Mouse",
+    "imageTitle": "rat",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "give him money",
+            "checkList": [
+                "Money_>=_50"
+            ],
+            "Pass": [
+                "MoneyDown_50",
+                "PoolAdd_3003"
+            ],
+            "Fail": [
+                "HPDown_10"
+            ]
+        },
+        {
+            "index": 2,
+            "text": "give him a lot of money",
+            "checkList": [
+                "Money_>=_100"
+            ],
+            "Pass": [
+                "MoneyDown_100",
+                "PoolAdd_3003"
+            ],
+            "Fail": [
+                "HPDown_10"
+            ]
+        },
+        {
+            "index": 3,
+            "text": "give him all your money!",
+            "checkList": [],
+            "Pass": [
+                "MoneyDown_All",
+                "PoolAdd_3003"
+            ],
+            "Fail": []
+        }
+    ]
+}
