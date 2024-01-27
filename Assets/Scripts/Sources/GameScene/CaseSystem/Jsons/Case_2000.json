@@ -2,10 +2,10 @@
     "caseId": "2000",
     "name": "test",
     "color": "#57B8DF",
-    "signal": "Textures/GameArts/CaseSignals/Hire",
+    "signal": "Farm",
     "timeout": 30,
     "caseContent": "test test test.",
-    "image": "Textures/GameArts/CaseImages/pig",
+    "image": "Pig",
     "imageTitle": "Pig",
     "chooseList": [
         {
