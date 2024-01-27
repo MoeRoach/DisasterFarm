@@ -19,9 +19,13 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
     private FarmPawnManager pawnManager;
 
     private Queue<string> operateQueue;
+    
+    // --- Test ---
+    private List<Square> emptyGrounds;
 
     protected override void OnAwake() {
         base.OnAwake();
+        emptyGrounds = new List<Square>();
         operateQueue = new Queue<string>();
         terrainTilemap = FindComponent<Tilemap>("MapRoot.Terrain");
         groundTilemap = FindComponent<Tilemap>("MapRoot.Ground");
@@ -59,6 +63,7 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
         GenerateInitPawn();
         await UniTask.Yield();
         // 通知完成初始化
+        TestPlants();
     }
 
     private async UniTask GenerateFarmTileData() {
@@ -100,28 +105,6 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
                         tile.structure = MapUtils.FENCE_INDEX_BOT;
                     } else if (y == 6) {
                         tile.structure = MapUtils.FENCE_INDEX_TOP;
-                    } else {
-                        tile.structure = -1;
-                        if (x < -6 || x > 6) continue;
-                        if (x == -6) {
-                            if (y == -5) {
-                                tile.ground = MapUtils.GROUND_INDEX_LEFT_BOT;
-                            } else if (y == 5) {
-                                tile.ground = MapUtils.GROUND_INDEX_LEFT_TOP;
-                            } else {
-                                tile.ground = MapUtils.GROUND_INDEX_LEFT;
-                            }
-                        } else if (x == 6) {
-                            if (y == -5) {
-                                tile.ground = MapUtils.GROUND_INDEX_RIGHT_BOT;
-                            } else if (y == 5) {
-                                tile.ground = MapUtils.GROUND_INDEX_RIGHT_TOP;
-                            } else {
-                                tile.ground = MapUtils.GROUND_INDEX_RIGHT;
-                            }
-                        } else {
-                            tile.ground = MapUtils.GROUND_INDEX_CENTER;
-                        }
                     }
                 }
                 
@@ -130,6 +113,49 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
                 if (counter < 500) continue;
                 counter = 0;
                 await UniTask.Yield();
+            }
+        }
+        
+        await UniTask.Yield();
+        var pivot = new Square(-5, 1);
+        var size = new Square(7, 5);
+        GenerateFarmBlock(pivot, size);
+        pivot.x += 8;
+        GenerateFarmBlock(pivot, size);
+        pivot.y -= 6;
+        GenerateFarmBlock(pivot, size);
+        pivot.x -= 8;
+        GenerateFarmBlock(pivot, size);
+    }
+
+    private void GenerateFarmBlock(Square pivot, Square size) {
+        for (var x = 0; x < size.x; x++) {
+            for (var y = 0; y < size.y; y++) {
+                var sq = new Square(pivot.x + x, pivot.y + y);
+                var tile = dataService.farmData.tiles[sq.Sid];
+                if (x == 0) {
+                    if (y == 0) {
+                        tile.ground = MapUtils.GROUND_INDEX_LEFT_BOT;
+                    } else if (y == size.y - 1) {
+                        tile.ground = MapUtils.GROUND_INDEX_LEFT_TOP;
+                    } else {
+                        tile.ground = MapUtils.GROUND_INDEX_LEFT;
+                    }
+                } else if (x == size.x - 1) {
+                    if (y == 0) {
+                        tile.ground = MapUtils.GROUND_INDEX_RIGHT_BOT;
+                    } else if (y == size.y - 1) {
+                        tile.ground = MapUtils.GROUND_INDEX_RIGHT_TOP;
+                    } else {
+                        tile.ground = MapUtils.GROUND_INDEX_RIGHT;
+                    }
+                } else {
+                    tile.ground = MapUtils.GROUND_INDEX_CENTER;
+                }
+
+                var dice = NumberUtils.RandomInteger(99);
+                if (dice > 25) continue;
+                emptyGrounds.Add(tile.coord.Clone());
             }
         }
     }
@@ -144,14 +170,32 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
         // 生成物体
         var hq = new Square(-9, 3);
         FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_HOUSE, hq);
-        for (var py = -5; py <= 5; py++) {
-            var pq = new Square(7, py);
-            FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, pq);
-        }
+        var ppc = new Square(-5, 5);
+        FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, ppc);
+        ppc.x += 8;
+        FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, ppc);
+        ppc.y -= 6;
+        FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, ppc);
+        ppc.x -= 8;
+        FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, ppc);
     }
     
     private void GenerateInitPawn() {
         
+    }
+
+    private void TestPlants() {
+        for (var i = 0; i < 10; i++) {
+            if (emptyGrounds.Count <= 0) break;
+            var index = NumberUtils.RandomInteger(emptyGrounds.Count - 1);
+            var sq = emptyGrounds[index];
+            emptyGrounds.RemoveAt(index);
+            if (FarmObjectManager.Instance.CheckCoordOccupiedByObject(sq)) continue;
+            var ps = NumberUtils.RandomInteger(3);
+            var ti = PlantConfigs.PlantFields[ps];
+            ApplyFieldTile(sq.x, sq.y, ti);
+            FarmObjectManager.Instance.GenerateFarmPlant(ps, sq);
+        }
     }
 
     private void ApplyGrassTile(int x, int y) {

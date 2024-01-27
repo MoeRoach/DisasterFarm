@@ -43,7 +43,7 @@ public abstract class BaseFarmObject : BaseObject  {
 		var offset = Vector3.zero;
 		offset.x = (Area.x - 1) / 2f;
 		offset.y = (Area.y - 1) / 2f;
-		transform.localPosition += offset;
+		avatarSprite.transform.localPosition += offset;
 	}
 
 	public async void SetupCoordinate(Square coord) {
@@ -54,6 +54,7 @@ public abstract class BaseFarmObject : BaseObject  {
 
 	protected override void Release() {
 		base.Release();
+		if (FarmObjectManager.Instance == null) return;
 		FarmObjectManager.Instance.UnregisterObject(this);
 	}
 }

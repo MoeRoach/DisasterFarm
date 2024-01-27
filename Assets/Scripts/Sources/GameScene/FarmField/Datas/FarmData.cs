@@ -86,3 +86,25 @@ public class PawnCommand {
 		return (Vector3) args[key];
 	}
 }
+
+public static class PlantConfigs {
+	
+	public const int PLANT_SERIAL_BERRY = 0;
+	public const int PLANT_SERIAL_BUSH = 1;
+	public const int PLANT_SERIAL_CARROT = 2;
+	public const int PLANT_SERIAL_FRUIT = 3;
+	
+	public static Dictionary<int, string> PlantNames = new Dictionary<int, string> {
+		[PLANT_SERIAL_BERRY] = PrefabUtils.PREFAB_NAME_PLANT_BERRY,
+		[PLANT_SERIAL_BUSH] = PrefabUtils.PREFAB_NAME_PLANT_BUSH,
+		[PLANT_SERIAL_CARROT] = PrefabUtils.PREFAB_NAME_PLANT_CARROT,
+		[PLANT_SERIAL_FRUIT] = PrefabUtils.PREFAB_NAME_PLANT_FRUIT
+	};
+	
+	public static Dictionary<int, int> PlantFields = new Dictionary<int, int> {
+		[PLANT_SERIAL_BERRY] = 2,
+		[PLANT_SERIAL_BUSH] = 3,
+		[PLANT_SERIAL_CARROT] = 1,
+		[PLANT_SERIAL_FRUIT] = 0
+	};
+}

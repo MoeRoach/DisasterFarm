@@ -34,8 +34,19 @@ public class FarmObjectManager : MonoSingleton<FarmObjectManager> {
         objectMap = new Dictionary<string, int>();
     }
 
-    public void GenerateFarmPlant(int serial) {
+    public void GenerateFarmPlant(int serial, Square coord) {
+        if (!PlantConfigs.PlantNames.ContainsKey(serial)) return;
+        var pn = PlantConfigs.PlantNames[serial];
+        var pos = MapUtils.SquareToWorld(coord);
+        var po = PrefabUtils.CreatePlant(pn, 0, transform);
+        po.transform.position = pos;
+        var ctrl = po.GetComponent<BasePlantController>();
+        if (ctrl == null) {
+            Destroy(po);
+            return;
+        }
         
+        ctrl.SetupIdentifier(ObjectIdentifier);
     }
 
     public void RegisterPlant(BasePlantController pc) {
@@ -61,7 +72,15 @@ public class FarmObjectManager : MonoSingleton<FarmObjectManager> {
 
     public void GenerateObject(string on, Square coord) {
         var pos = MapUtils.SquareToWorld(coord);
+        var ob = PrefabUtils.CreateFarmObject(on, 0, transform);
+        ob.transform.position = pos;
+        var ctrl = ob.GetComponent<BaseFarmObject>();
+        if (ctrl == null) {
+            Destroy(ob);
+            return;
+        }
         
+        ctrl.SetupIdentifier(ObjectIdentifier);
     }
 
     public void RegisterObject(BaseFarmObject ob) {

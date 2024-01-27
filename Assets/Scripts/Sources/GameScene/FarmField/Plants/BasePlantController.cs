@@ -50,6 +50,7 @@ public abstract class BasePlantController : BaseObject {
 
 	protected override void Release() {
 		base.Release();
+		if (FarmObjectManager.Instance == null) return;
 		FarmObjectManager.Instance.UnregisterPlant(this);
 	}
 }
