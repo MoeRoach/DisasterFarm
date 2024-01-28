@@ -1,3 +1,4 @@
+using RoachLite.AnimationManagement;
 using RoachLite.Common;
 using RoachLite.PrefabManagement;
 using RoachLite.Services;
@@ -32,6 +33,7 @@ namespace RoachLite {
             ObjectManager.Instance.Initialize();
             isInitialized = true;
             // 任何涉及到BaseObject子类脚本的对象初始化都必须在更新标志后进行，避免无限递归
+            AnimaManager.Instance.LoadAnimaData();
             PrefabManager.Instance.LoadPrefabData();
             SpriteManager.Instance.LoadSpriteData();
             TilesManager.Instance.LoadTilesData();

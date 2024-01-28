@@ -5,6 +5,9 @@ using Cysharp.Threading.Tasks;
 using RoachLite.Basic;
 using RoachLite.Data;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.Playables;
+
 // Created By Yu.Liu
 public abstract class BasePawnController : BaseObject {
 
@@ -13,6 +16,7 @@ public abstract class BasePawnController : BaseObject {
 	
 	protected SpriteRenderer avatarSprite;
 	protected Animator avatarAnimator;
+	protected PlayableGraph avatarGraph;
 	
 	private FarmDataService dataService;
 	private FarmObjectManager objectManager;
@@ -35,6 +39,13 @@ public abstract class BasePawnController : BaseObject {
 		objectManager = FarmObjectManager.Instance;
 		pawnManager = FarmPawnManager.Instance;
 		RegisterUpdateFunction(1, UpdateCommandQueue);
+		InitPawnAnimation();
+	}
+
+	protected abstract void InitPawnAnimation();
+
+	protected AnimationClipPlayable PlayClipPlayable(AnimationClip clip) {
+		return AnimationPlayableUtilities.PlayClip(avatarAnimator, clip, out avatarGraph);
 	}
 
 	public void SetupIdentifier(int id) {

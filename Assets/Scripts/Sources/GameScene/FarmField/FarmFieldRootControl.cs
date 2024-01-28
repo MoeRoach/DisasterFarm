@@ -50,6 +50,40 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
 
     private void ProcessOperation(string op) {
         // 先拆解指令，取得指令本体和参数，随后执行
+        var split = op.Split('_');
+        if (split.Length != 2) return;
+        var cmd = split[0];
+        var arg = split[1];
+        switch (cmd) {
+            case PawnCommand.OP_CMD_GOFARM: // 种田指令，随机选择一块田地，移动过去，开始工作即可
+                DoGoFarm(arg);
+                break;
+            case PawnCommand.OP_CMD_GOATTACK: // 攻击指令，随机选择一个敌人，移动过去，开始攻击即可
+                DoGoAttack(arg);
+                break;
+            case PawnCommand.OP_CMD_THIEFCOME: // 偷窃和破坏指令，随机选择植物或者房屋，移动过去，开始破坏即可
+                DoThiefCome(arg);
+                break;
+            case PawnCommand.OP_CMD_DAMAGERCOME: // 破坏指令，随机选择农民或者植物，移动过去，开始破坏即可
+                DoDamagerCome(arg);
+                break;
+        }
+    }
+
+    private void DoGoFarm(string pn) {
+        
+    }
+
+    private void DoGoAttack(string pn) {
+        
+    }
+
+    private void DoThiefCome(string pn) {
+        
+    }
+
+    private void DoDamagerCome(string pn) {
+        
     }
 
     private async void InitFarm() {
@@ -150,7 +184,13 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
                         tile.ground = MapUtils.GROUND_INDEX_RIGHT;
                     }
                 } else {
-                    tile.ground = MapUtils.GROUND_INDEX_CENTER;
+                    if (y == 0) {
+                        tile.ground = MapUtils.GROUND_INDEX_BOT;
+                    } else if (y == size.y - 1) {
+                        tile.ground = MapUtils.GROUND_INDEX_TOP;
+                    } else {
+                        tile.ground = MapUtils.GROUND_INDEX_CENTER;
+                    }
                 }
 
                 var dice = NumberUtils.RandomInteger(99);
@@ -181,7 +221,18 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
     }
     
     private void GenerateInitPawn() {
-        
+        var pawns = new List<string>(PawnConfigs.PawnNames);
+        for (var i = 0; i < 5; i++) {
+            if (emptyGrounds.Count <= 0) break;
+            var index = NumberUtils.RandomInteger(emptyGrounds.Count - 1);
+            var sq = emptyGrounds[index];
+            emptyGrounds.RemoveAt(index);
+            if (FarmObjectManager.Instance.CheckCoordOccupiedByObject(sq)) continue;
+            var pi = NumberUtils.RandomInteger(pawns.Count - 1);
+            var pn = pawns[pi];
+            FarmPawnManager.Instance.GeneratePlayerPawn(pn, sq);
+            pawns.RemoveAt(pi);
+        }
     }
 
     private void TestPlants() {

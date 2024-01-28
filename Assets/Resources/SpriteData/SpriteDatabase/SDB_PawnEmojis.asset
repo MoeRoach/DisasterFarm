@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f0e5d3d605116438e78e520dc6f8a9, type: 3}
+  m_Name: SDB_PawnEmojis
+  m_EditorClassIdentifier: 
+  databaseName: PawnEmojis
+  groupNames:
+  - Emojis
+  spriteGroups:
+  - groupName: Emojis
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: emojis_0
+      spriteObject: {fileID: 338522683, guid: b27c5f1678e72674d90327ec37857428, type: 3}
+    - dataName: "\u7F16\u53F7(1)"
+      spriteName: emojis_1
+      spriteObject: {fileID: -953026843, guid: b27c5f1678e72674d90327ec37857428, type: 3}
+    - dataName: "\u7F16\u53F7(2)"
+      spriteName: emojis_2
+      spriteObject: {fileID: -1991523290, guid: b27c5f1678e72674d90327ec37857428, type: 3}
+    - dataName: "\u7F16\u53F7(3)"
+      spriteName: emojis_3
+      spriteObject: {fileID: -724684295, guid: b27c5f1678e72674d90327ec37857428, type: 3}
+    - dataName: "\u7F16\u53F7(4)"
+      spriteName: emojis_4
+      spriteObject: {fileID: 1336179046, guid: b27c5f1678e72674d90327ec37857428, type: 3}
+    - dataName: "\u7F16\u53F7(5)"
+      spriteName: emojis_5
+      spriteObject: {fileID: -619808528, guid: b27c5f1678e72674d90327ec37857428, type: 3}
+    - dataName: "\u7F16\u53F7(6)"
+      spriteName: emojis_6
+      spriteObject: {fileID: -1104302336, guid: b27c5f1678e72674d90327ec37857428, type: 3}
+    - dataName: "\u7F16\u53F7(7)"
+      spriteName: emojis_7
+      spriteObject: {fileID: 441177047, guid: b27c5f1678e72674d90327ec37857428, type: 3}
+    isExpanded: 0
+  isExpanded: 1
