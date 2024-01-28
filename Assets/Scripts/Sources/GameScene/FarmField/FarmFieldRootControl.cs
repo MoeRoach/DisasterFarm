@@ -368,32 +368,32 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
     }
     
     private void GenerateInitPawn() {
-        var pawns = new List<string>(PawnConfigs.PawnNames);
-        for (var i = 0; i < 5; i++) {
-            if (emptyGrounds.Count <= 0) break;
-            var index = NumberUtils.RandomInteger(emptyGrounds.Count - 1);
-            var sq = emptyGrounds[index];
-            emptyGrounds.RemoveAt(index);
-            if (FarmObjectManager.Instance.CheckCoordOccupiedByObject(sq)) continue;
-            var pi = NumberUtils.RandomInteger(pawns.Count - 1);
-            var pn = pawns[pi];
-            FarmPawnManager.Instance.GeneratePlayerPawn(pn, sq);
-            pawns.RemoveAt(pi);
-        }
+        // var pawns = new List<string>(PawnConfigs.PawnNames);
+        // for (var i = 0; i < 5; i++) {
+        //     if (emptyGrounds.Count <= 0) break;
+        //     var index = NumberUtils.RandomInteger(emptyGrounds.Count - 1);
+        //     var sq = emptyGrounds[index];
+        //     emptyGrounds.RemoveAt(index);
+        //     if (FarmObjectManager.Instance.CheckCoordOccupiedByObject(sq)) continue;
+        //     var pi = NumberUtils.RandomInteger(pawns.Count - 1);
+        //     var pn = pawns[pi];
+        //     FarmPawnManager.Instance.GeneratePlayerPawn(pn, sq);
+        //     pawns.RemoveAt(pi);
+        // }
     }
 
     private void TestPlants() {
-        for (var i = 0; i < 10; i++) {
-            if (emptyGrounds.Count <= 0) break;
-            var index = NumberUtils.RandomInteger(emptyGrounds.Count - 1);
-            var sq = emptyGrounds[index];
-            emptyGrounds.RemoveAt(index);
-            if (FarmObjectManager.Instance.CheckCoordOccupiedByObject(sq)) continue;
-            var ps = NumberUtils.RandomInteger(3);
-            var ti = PlantConfigs.PlantFields[ps];
-            ApplyFieldTile(sq.x, sq.y, ti);
-            FarmObjectManager.Instance.GenerateFarmPlant(ps, sq);
-        }
+        // for (var i = 0; i < 10; i++) {
+        //     if (emptyGrounds.Count <= 0) break;
+        //     var index = NumberUtils.RandomInteger(emptyGrounds.Count - 1);
+        //     var sq = emptyGrounds[index];
+        //     emptyGrounds.RemoveAt(index);
+        //     if (FarmObjectManager.Instance.CheckCoordOccupiedByObject(sq)) continue;
+        //     var ps = NumberUtils.RandomInteger(3);
+        //     var ti = PlantConfigs.PlantFields[ps];
+        //     ApplyFieldTile(sq.x, sq.y, ti);
+        //     FarmObjectManager.Instance.GenerateFarmPlant(ps, sq);
+        // }
     }
 
     private void ApplyGrassTile(int x, int y) {

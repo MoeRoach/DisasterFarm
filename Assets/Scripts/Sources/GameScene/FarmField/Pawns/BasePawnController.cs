@@ -250,6 +250,11 @@ public abstract class BasePawnController : BaseObject {
 		runnerList.Remove(runner);
 	}
 
+	protected override void Release() {
+		base.Release();
+		if (avatarGraph.IsValid()) avatarGraph.Destroy();
+	}
+
 	protected class AsyncCommandRunner {
 
 		public PawnCommand cmd;
