@@ -23,8 +23,8 @@ public class CaseManager : MonoBehaviour
     void Start()
     {
         // init caseSystem
-        CaseList.Add(2000);
-        view.AddCaseController(2000);
+        // CaseList.Add(2000);
+        // view.AddCaseController(2000);
         // view.CurrentObj = view.AddCaseController(2000);
         // view.UpdateView();
 
@@ -52,7 +52,7 @@ public class CaseManager : MonoBehaviour
         CaseList = new List<int>();
         CasePool = new List<int>();
 
-        InvokeRepeating("RandomCaseFromPoolToList", 10f, 10f);
+        InvokeRepeating("RandomCaseFromPoolToList", 10f, 5f);
     }
 
     void Update()

@@ -52,6 +52,62 @@ public class CaseViewController : MonoSingleton<CaseViewController>
         }
     }
 
+    public void GoFarmDone(string str)
+    {
+        switch (str)
+        {
+            case SpriteUtils.SPRITE_NAME_PIG:
+                AddToPool(2002);
+                break;
+            case SpriteUtils.SPRITE_NAME_BULL:
+                AddToPool(2005);
+                break;
+            case SpriteUtils.SPRITE_NAME_COW:
+                AddToPool(2008);
+                break;
+            case SpriteUtils.SPRITE_NAME_CAPYBARA:
+                AddToPool(2011);
+                break;
+            case SpriteUtils.SPRITE_NAME_GOAT:
+                AddToPool(2014);
+                break;
+            case SpriteUtils.SPRITE_NAME_MOUSE:
+                AddToPool(2017);
+                break;
+            default:
+                Debug.Log($"AddToPool error");
+                break;
+        }
+    }
+
+    public void GoThiefDone(string str)
+    {
+        switch (str)
+        {
+            case SpriteUtils.SPRITE_NAME_PIG:
+                AddToPool(2001);
+                break;
+            case SpriteUtils.SPRITE_NAME_BULL:
+                AddToPool(2004);
+                break;
+            case SpriteUtils.SPRITE_NAME_COW:
+                AddToPool(2007);
+                break;
+            case SpriteUtils.SPRITE_NAME_CAPYBARA:
+                AddToPool(2010);
+                break;
+            case SpriteUtils.SPRITE_NAME_GOAT:
+                AddToPool(2013);
+                break;
+            case SpriteUtils.SPRITE_NAME_MOUSE:
+                AddToPool(2016);
+                break;
+            default:
+                Debug.Log($"AddToPool error");
+                break;
+        }
+    }
+
     public void ClearView()
     {
         Debug.Log($"ClearView");
