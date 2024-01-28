@@ -1,7 +1,7 @@
 {
     "caseId": "2000",
     "name": "test",
-    "color": "#57B8DF",
+    "color": "#AB5D52",
     "signal": "Farm",
     "timeout": 30,
     "caseContent": "test test test.",

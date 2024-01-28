@@ -1,7 +1,7 @@
 {
     "caseId": "2002",
     "name": "pig go farming",
-    "color": "#57B8DF",
+    "color": "#AB5D52",
     "signal": "Farm",
     "timeout": 30,
     "caseContent": "pig go farming.",

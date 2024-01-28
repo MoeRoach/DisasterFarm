@@ -39,6 +39,7 @@ public class CaseController : MonoBehaviour
         if (GetComponent<Image>().fillAmount <= 0)
         {
             View.ClearView();
+            View.AddToPool(Data.caseId);
             Destroy(gameObject);
         }
     }

@@ -1,7 +1,7 @@
 {
     "caseId": "2001",
     "name": "new farmer pig",
-    "color": "#57B8DF",
+    "color": "#AB5D52",
     "signal": "Farm",
     "timeout": 30,
     "caseContent": "Here comes a new farmer, a pig.",

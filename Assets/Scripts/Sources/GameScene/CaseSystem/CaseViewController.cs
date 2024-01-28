@@ -16,6 +16,10 @@ public class CaseViewController : MonoBehaviour
     // private int selectIndex;
     [SerializeField] private Transform viewTrans;
     [SerializeField] private CaseManager caseManager;
+    public void AddToPool(int caseId)
+    {
+        caseManager.CasePool.Add(caseId);
+    }
 
     public void ClearView()
     {
