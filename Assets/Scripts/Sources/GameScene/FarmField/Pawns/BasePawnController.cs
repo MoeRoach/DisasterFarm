@@ -26,6 +26,7 @@ public abstract class BasePawnController : BaseObject {
 
 	protected Queue<PawnCommand> commandQueue;
 	protected List<AsyncCommandRunner> runnerList;
+	protected string lastOperation;
 
 	protected override void OnAwake() {
 		base.OnAwake();
@@ -53,6 +54,10 @@ public abstract class BasePawnController : BaseObject {
 	public void SetupIdentifier(int id, string n) {
 		Id = id;
 		Name = n;
+	}
+
+	public void SetupOperation(string op) {
+		lastOperation = op;
 	}
 
 	public void GetAttack(BasePawnController src) {
@@ -127,6 +132,7 @@ public abstract class BasePawnController : BaseObject {
 		var timeLength = (target - start).magnitude / spd;
 		while (timer < 1f) {
 			timer += Time.deltaTime / timeLength;
+			if (gameObject == null || this == null) return;
 			transform.position = Vector3.Lerp(start, target, timer);
 			await UniTask.Yield();
 			if (runner.isCanceled) return;
@@ -148,7 +154,15 @@ public abstract class BasePawnController : BaseObject {
 
 	protected virtual void DoPlant(int ps) {
 		var coord = MapUtils.WorldToSquare(transform.position);
-		FarmFieldRootControl.Instance.PlantFarmPlant(ps, coord.x, coord.y);
+		if (FarmObjectManager.Instance.CheckCoordOccupiedByPlant(coord)) {
+			var pid = FarmObjectManager.Instance.GetPlantAtCoord(coord);
+			var po = FarmObjectManager.Instance.GetPlant(pid);
+			if (po == null) return;
+			Destroy(po.gameObject);
+			FarmFieldRootControl.Instance.HarvestFarmPlant(coord.x, coord.y);
+		} else {
+			FarmFieldRootControl.Instance.PlantFarmPlant(ps, coord.x, coord.y);
+		}
 	}
 	
 	protected virtual async UniTask ExecuteHarvest(AsyncCommandRunner runner) {
@@ -256,7 +270,12 @@ public abstract class BasePawnController : BaseObject {
 	protected virtual void OnCommandDone(AsyncCommandRunner runner) {
 		runnerList.Remove(runner);
 		if (runner.cmd.cmd.Equals(PawnCommand.CMD_STR_DONE)) {
-			CaseViewController.Instance.AddToPool(Name);
+			if (lastOperation.Equals(PawnCommand.OP_CMD_GOFARM)) {
+				CaseViewController.Instance.GoFarmDone(Name);
+			} else if (lastOperation.Equals(PawnCommand.OP_CMD_THIEFCOME)) {
+				CaseViewController.Instance.GoThiefDone(Name);
+			}
+			
 			Destroy(gameObject);
 		}
 	}

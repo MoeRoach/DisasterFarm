@@ -20,11 +20,11 @@ MonoBehaviour:
   - PawnFrog
   - PawnGoat
   - PawnHuman
-  - PawnMouse
   - PawnOwl
   - PawnParrotKing
   - PawnParrotKnight
   - PawnPig
+  - PawnRat
   prefabGroups:
   - groupName: PawnBull
     groupData:
@@ -62,12 +62,6 @@ MonoBehaviour:
       prefabName: PawnHuman
       prefabObject: {fileID: 7347517972940704878, guid: 22877b06474a6c44f98ab5bf8b84d9c8, type: 3}
     isExpanded: 0
-  - groupName: PawnMouse
-    groupData:
-    - dataName: "\u7F16\u53F7(0)"
-      prefabName: PawnMouse
-      prefabObject: {fileID: 3262410409011293701, guid: 8e611026a52d7294e896c4bf01073a4f, type: 3}
-    isExpanded: 0
   - groupName: PawnOwl
     groupData:
     - dataName: "\u7F16\u53F7(0)"
@@ -91,5 +85,11 @@ MonoBehaviour:
     - dataName: "\u7F16\u53F7(0)"
       prefabName: PawnPig
       prefabObject: {fileID: 5508649382533935350, guid: be903e774b909ad48a9ea10de365390a, type: 3}
+    isExpanded: 0
+  - groupName: PawnRat
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      prefabName: PawnMouse
+      prefabObject: {fileID: 3262410409011293701, guid: 8e611026a52d7294e896c4bf01073a4f, type: 3}
     isExpanded: 0
   isExpanded: 1

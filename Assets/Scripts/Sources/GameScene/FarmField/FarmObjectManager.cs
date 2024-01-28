@@ -48,6 +48,7 @@ public class FarmObjectManager : MonoSingleton<FarmObjectManager> {
         }
         
         ctrl.SetupIdentifier(ObjectIdentifier);
+        plants[ctrl.Id] = ctrl;
     }
 
     public void RegisterPlant(BasePlantController pc) {
@@ -82,6 +83,7 @@ public class FarmObjectManager : MonoSingleton<FarmObjectManager> {
         }
         
         ctrl.SetupIdentifier(ObjectIdentifier);
+        objects[ctrl.Id] = ctrl;
     }
 
     public void RegisterObject(BaseFarmObject ob) {

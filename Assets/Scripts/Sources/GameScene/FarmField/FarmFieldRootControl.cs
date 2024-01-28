@@ -124,6 +124,7 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
         
         cmd = new PawnCommand(PawnCommand.CMD_STR_DONE);
         pp.SendCommand(cmd);
+        pp.SetupOperation(PawnCommand.OP_CMD_GOFARM);
     }
 
     private async void DoGoAttack(string pn) {
@@ -152,6 +153,7 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
         
         cmd = new PawnCommand(PawnCommand.CMD_STR_DONE);
         pp.SendCommand(cmd);
+        pp.SetupOperation(PawnCommand.OP_CMD_GOATTACK);
     }
 
     private async void DoThiefCome(string pn) {
@@ -190,6 +192,7 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
         
         cmd = new PawnCommand(PawnCommand.CMD_STR_DONE);
         ep.SendCommand(cmd);
+        ep.SetupOperation(PawnCommand.OP_CMD_THIEFCOME);
     }
 
     private async void DoDamagerCome(string pn) {
@@ -220,6 +223,7 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
         
         cmd = new PawnCommand(PawnCommand.CMD_STR_DONE);
         ep.SendCommand(cmd);
+        ep.SetupOperation(PawnCommand.OP_CMD_DAMAGERCOME);
     }
 
     private async void InitFarm() {
@@ -362,12 +366,32 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
         FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_HOUSE, hq);
         var ppc = new Square(-5, 5);
         FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, ppc);
+        var tppc = ppc.Clone();
+        for (var x = 0; x < 3; x++) {
+            emptyGrounds.Remove(tppc);
+            tppc.x++;
+        }
         ppc.x += 8;
         FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, ppc);
+        tppc = ppc.Clone();
+        for (var x = 0; x < 3; x++) {
+            emptyGrounds.Remove(tppc);
+            tppc.x++;
+        }
         ppc.y -= 6;
         FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, ppc);
+        tppc = ppc.Clone();
+        for (var x = 0; x < 3; x++) {
+            emptyGrounds.Remove(tppc);
+            tppc.x++;
+        }
         ppc.x -= 8;
         FarmObjectManager.Instance.GenerateObject(PrefabUtils.PREFAB_NAME_FARM_POOL, ppc);
+        tppc = ppc.Clone();
+        for (var x = 0; x < 3; x++) {
+            emptyGrounds.Remove(tppc);
+            tppc.x++;
+        }
     }
     
     private void GenerateInitPawn() {
