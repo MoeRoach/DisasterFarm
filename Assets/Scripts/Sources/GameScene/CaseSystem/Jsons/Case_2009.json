@@ -1,12 +1,12 @@
 {
-    "caseId": "2002",
-    "name": "pig go farming",
-    "color": "#AB5D52",
-    "signal": "Farm",
+    "caseId": "2009",
+    "name": "Cow come to steal",
+    "color": "#DB4142",
+    "signal": "Fight",
     "timeout": 30,
-    "caseContent": "pig go farming.",
-    "image": "Pig",
-    "imageTitle": "farmer Pig",
+    "caseContent": "Cow come with bad intentions.",
+    "image": "Cow",
+    "imageTitle": "bad Cow",
     "chooseList": [
         {
             "index": 0,
@@ -17,35 +17,30 @@
         },
         {
             "index": 1,
-            "text": "Go, pig go.",
+            "text": "???",
             "checkList": [],
             "Pass": [
-                "GoFarm_Pig"
+                "ThiefCome_Cow"
             ],
             "Fail": []
         },
         {
             "index": 2,
-            "text": "No",
+            "text": "!!!",
             "checkList": [],
             "Pass": [
-                "POOLADD_2002"
+                "ThiefCome_Cow"
             ],
             "Fail": []
         },
         {
             "index": 3,
-            "text": "cook this pig",
-            "checkList": [
-                "Strength_>_100"
-            ],
+            "text": "***",
+            "checkList": [],
             "Pass": [
-                "CropUp_50",
-                "HPUp_10"
+                "ThiefCome_Cow"
             ],
-            "Fail": [
-                "HPDown_10"
-            ]
+            "Fail": []
         }
     ]
 }

@@ -24,11 +24,16 @@ public class CaseManager : MonoBehaviour
     {
         // init caseSystem
         CaseList.Add(2000);
-        view.CurrentObj = view.AddCaseController(2000);
-        view.UpdateView();
+        view.AddCaseController(2000);
+        // view.CurrentObj = view.AddCaseController(2000);
+        // view.UpdateView();
 
         CaseList.Add(2001);
         view.AddCaseController(2001);
+        CaseList.Add(2004);
+        view.AddCaseController(2004);
+        CaseList.Add(2007);
+        view.AddCaseController(2007);
         CaseList.Add(3002);
         view.AddCaseController(3002);
 

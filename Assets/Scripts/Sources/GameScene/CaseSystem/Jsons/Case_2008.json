@@ -1,12 +1,12 @@
 {
-    "caseId": "2002",
-    "name": "pig go farming",
+    "caseId": "2008",
+    "name": "Cow go farming",
     "color": "#AB5D52",
     "signal": "Farm",
     "timeout": 30,
-    "caseContent": "pig go farming.",
-    "image": "Pig",
-    "imageTitle": "farmer Pig",
+    "caseContent": "Cow go farming.",
+    "image": "Cow",
+    "imageTitle": "farmer Cow",
     "chooseList": [
         {
             "index": 0,
@@ -17,10 +17,10 @@
         },
         {
             "index": 1,
-            "text": "Go, pig go.",
+            "text": "Go, Cow go.",
             "checkList": [],
             "Pass": [
-                "GoFarm_Pig"
+                "GoFarm_Cow"
             ],
             "Fail": []
         },
@@ -29,13 +29,13 @@
             "text": "No",
             "checkList": [],
             "Pass": [
-                "POOLADD_2002"
+                "POOLADD_2008"
             ],
             "Fail": []
         },
         {
             "index": 3,
-            "text": "cook this pig",
+            "text": "cook this Cow",
             "checkList": [
                 "Strength_>_100"
             ],

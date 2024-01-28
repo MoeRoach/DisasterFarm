@@ -1,12 +1,12 @@
 {
-    "caseId": "2002",
-    "name": "pig go farming",
+    "caseId": "2004",
+    "name": "new farmer bull",
     "color": "#AB5D52",
     "signal": "Farm",
     "timeout": 30,
-    "caseContent": "pig go farming.",
-    "image": "Pig",
-    "imageTitle": "farmer Pig",
+    "caseContent": "Here comes a new farmer, a bull.",
+    "image": "Bull",
+    "imageTitle": "Bull",
     "chooseList": [
         {
             "index": 0,
@@ -17,27 +17,30 @@
         },
         {
             "index": 1,
-            "text": "Go, pig go.",
-            "checkList": [],
+            "text": "hire Bull",
+            "checkList": [
+                "Money_>_100"
+            ],
             "Pass": [
-                "GoFarm_Pig"
+                "MoneyDown_50",
+                "PoolAdd_2005"
             ],
             "Fail": []
         },
         {
             "index": 2,
-            "text": "No",
+            "text": "leave pig away",
             "checkList": [],
             "Pass": [
-                "POOLADD_2002"
+                "PoolAdd_2006"
             ],
             "Fail": []
         },
         {
             "index": 3,
-            "text": "cook this pig",
+            "text": "cook this bull",
             "checkList": [
-                "Strength_>_100"
+                "Strength_>_80"
             ],
             "Pass": [
                 "CropUp_50",
