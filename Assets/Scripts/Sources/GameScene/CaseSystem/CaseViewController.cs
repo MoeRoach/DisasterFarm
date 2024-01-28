@@ -199,10 +199,9 @@ public class CaseViewController : MonoBehaviour
     public void UpdateFromCaseList()
     {
         Debug.Log($"UpdateFromCaseList");
-        Transform[] childTransforms = viewTrans.GetComponentsInChildren<Transform>();
-        if (childTransforms.Length <= 0)
+        if (viewTrans.childCount <= 0)
         {
-            Debug.Log($"childTransforms.Length <= 0");
+            Debug.Log($"viewTrans.childCount <= 0");
             return;
         }
 
@@ -227,10 +226,14 @@ public class CaseViewController : MonoBehaviour
                 Debug.Log($"ListAdd {result[1]}");
                 break;
             case "PoolAdd":
-                Debug.Log($"PoolAdd {result[1]}");
                 if (int.TryParse(result[1], out number))
                 {
+                    Debug.Log($"PoolAdd {result[1]}");
                     caseManager.CasePool.Add(number);
+                }
+                else
+                {
+                    Debug.Log($"PoolAdd fail");
                 }
                 break;
             // attributes issue

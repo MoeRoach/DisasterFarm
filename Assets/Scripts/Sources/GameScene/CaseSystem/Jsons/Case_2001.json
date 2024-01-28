@@ -23,7 +23,7 @@
             ],
             "Pass": [
                 "MoneyDown_50",
-                "POOLADD_2002"
+                "PoolAdd_2002"
             ],
             "Fail": []
         },
@@ -32,7 +32,7 @@
             "text": "leave pig away",
             "checkList": [],
             "Pass": [
-                "POOLADD_2003"
+                "PoolAdd_2003"
             ],
             "Fail": []
         },
