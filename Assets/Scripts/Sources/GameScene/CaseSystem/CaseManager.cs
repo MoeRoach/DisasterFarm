@@ -37,6 +37,8 @@ public class CaseManager : MonoBehaviour
 
         CaseList.Add(3002);
         view.AddCaseController(3002);
+        CaseList.Add(3005);
+        view.AddCaseController(3005);
 
         CaseList.Add(4001);
         view.AddCaseController(4001);

@@ -1,0 +1,44 @@
+{
+    "caseId": "3006",
+    "name": "let's cancel",
+    "color": "#DB4142",
+    "signal": "Other",
+    "timeout": 30,
+    "caseContent": "forg protester want you to join him to cancel this old cow",
+    "image": "Frog",
+    "imageTitle": "Frog",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "join him",
+            "checkList": [],
+            "Pass": [
+                "PoolAdd_3007"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 2,
+            "text": "I have more important thing to do(no)",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 3,
+            "text": "I will support you by comment in interent",
+            "checkList": [],
+            "Pass": [
+                "FameDown_10"
+            ],
+            "Fail": []
+        }
+    ]
+}

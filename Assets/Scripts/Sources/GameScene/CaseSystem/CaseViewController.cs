@@ -24,6 +24,25 @@ public class CaseViewController : MonoSingleton<CaseViewController>
         caseManager.CasePool.Add(caseId);
     }
 
+    public void AddToPool(string str)
+    {
+        switch (str)
+        {
+            case SpriteUtils.SPRITE_NAME_PIG:
+                AddToPool(2002);
+                break;
+            case SpriteUtils.SPRITE_NAME_BULL:
+                AddToPool(2005);
+                break;
+            case SpriteUtils.SPRITE_NAME_COW:
+                AddToPool(2008);
+                break;
+            default:
+                Debug.Log($"AddToPool error");
+                break;
+        }
+    }
+
     public void ClearView()
     {
         Debug.Log($"ClearView");

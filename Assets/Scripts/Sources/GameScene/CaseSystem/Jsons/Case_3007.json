@@ -1,0 +1,40 @@
+{
+    "caseId": "3006",
+    "name": "you are a piece of shit!",
+    "color": "#DB4142",
+    "signal": "Other",
+    "timeout": 30,
+    "caseContent": "forg protester want you to join him to cancel this old cow",
+    "image": "Frog",
+    "imageTitle": "Frog",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "start protesting",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 2,
+            "text": "wait! why do we protesting for?",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 3,
+            "text": "I am too tired.I will go home first(stop protesting)",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        }
+    ]
+}
