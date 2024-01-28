@@ -95,8 +95,11 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
                 }
             } else {
                 var pc = FarmObjectManager.Instance.PickRandomPlantCoord();
-                if (pc == null) break;
-                targetList.Add(pc); 
+                if (pc == null) {
+                    if (emptyGrounds.Count <= 0) break;
+                    var index = NumberUtils.RandomInteger(emptyGrounds.Count - 1);
+                    targetList.Add(emptyGrounds[index]);
+                } else targetList.Add(pc);
             }
         }
 
@@ -396,6 +399,18 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
         // }
     }
 
+    public void PlantFarmPlant(int ps, int x, int y) {
+        var sq = new Square(x, y);
+        if (FarmObjectManager.Instance.CheckCoordOccupiedByObject(sq)) return;
+        var ti = PlantConfigs.PlantFields[ps];
+        ApplyFieldTile(sq.x, sq.y, ti);
+        FarmObjectManager.Instance.GenerateFarmPlant(ps, sq);
+    }
+
+    public void HarvestFarmPlant(int x, int y) {
+        ApplyFieldTile(x, y, int.MinValue);
+    }
+
     private void ApplyGrassTile(int x, int y) {
         var coord = MapUtils.SquareToCoordinate(x, y);
         var tile = MapUtils.GetGrassTile();
@@ -417,7 +432,7 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
 
     public void ApplyFieldTile(int x, int y, int s) {
         var coord = MapUtils.SquareToCoordinate(x, y);
-        var tile = MapUtils.GetFieldTile(s);
+        var tile = s == int.MinValue ? null : MapUtils.GetFieldTile(s);
         fieldsTilemap.SetTile(coord, tile);
     }
 

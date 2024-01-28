@@ -35,7 +35,8 @@ public static class PrefabUtils {
 	}
 
 	public static GameObject CreatePawn(string pn, int index, Transform root) {
-		return CreateObject(PDB_NAME_FARM_PAWNS, pn, index, root);
+		var realn = $"Pawn{pn}";
+		return CreateObject(PDB_NAME_FARM_PAWNS, realn, index, root);
 	}
 	
 	public static GameObject CreatePlant(string pn, int index, Transform root) {

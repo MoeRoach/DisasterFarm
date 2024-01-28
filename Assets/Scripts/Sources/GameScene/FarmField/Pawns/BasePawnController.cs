@@ -124,8 +124,9 @@ public abstract class BasePawnController : BaseObject {
 		var spd = runner.cmd.GetFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED);
 		var timer = 0f;
 		var start = transform.position;
+		var timeLength = (target - start).magnitude / spd;
 		while (timer < 1f) {
-			timer += Time.deltaTime * spd;
+			timer += Time.deltaTime / timeLength;
 			transform.position = Vector3.Lerp(start, target, timer);
 			await UniTask.Yield();
 			if (runner.isCanceled) return;
@@ -144,8 +145,11 @@ public abstract class BasePawnController : BaseObject {
 			if (runner.isCanceled) return;
 		}
 	}
-	
-	protected virtual void DoPlant(int ps) { }
+
+	protected virtual void DoPlant(int ps) {
+		var coord = MapUtils.WorldToSquare(transform.position);
+		FarmFieldRootControl.Instance.PlantFarmPlant(ps, coord.x, coord.y);
+	}
 	
 	protected virtual async UniTask ExecuteHarvest(AsyncCommandRunner runner) {
 		var pid = runner.cmd.GetInteger(PawnCommand.CMD_ARG_KEY_PLANT_IDENTIFIER);
@@ -158,8 +162,14 @@ public abstract class BasePawnController : BaseObject {
 			if (runner.isCanceled) return;
 		}
 	}
-	
-	protected virtual void DoHarvest(int pid) { }
+
+	protected virtual void DoHarvest(int pid) {
+		var po = FarmObjectManager.Instance.GetPlant(pid);
+		if (po == null) return;
+		Destroy(po.gameObject);
+		var coord = MapUtils.WorldToSquare(transform.position);
+		FarmFieldRootControl.Instance.HarvestFarmPlant(coord.x, coord.y);
+	}
 
 	protected virtual async UniTask ExecuteFollow(AsyncCommandRunner runner) {
 		var pid = runner.cmd.GetInteger(PawnCommand.CMD_ARG_KEY_PAWN_IDENTIFIER);
@@ -214,15 +224,19 @@ public abstract class BasePawnController : BaseObject {
 		DoHide();
 		await UniTask.Yield();
 	}
-	
-	protected virtual void DoHide() { }
+
+	protected virtual void DoHide() {
+		avatarSprite.color = Color.clear;
+	}
 
 	protected virtual async UniTask ExecuteShow(AsyncCommandRunner runner) {
 		DoShow();
 		await UniTask.Yield();
 	}
-	
-	protected virtual void DoShow() { }
+
+	protected virtual void DoShow() {
+		avatarSprite.color = Color.white;
+	}
 
 	protected virtual async UniTask ExecuteDone(AsyncCommandRunner runner) {
 		await UniTask.Yield();
@@ -243,6 +257,7 @@ public abstract class BasePawnController : BaseObject {
 		runnerList.Remove(runner);
 		if (runner.cmd.cmd.Equals(PawnCommand.CMD_STR_DONE)) {
 			CaseViewController.Instance.AddToPool(Name);
+			Destroy(gameObject);
 		}
 	}
 

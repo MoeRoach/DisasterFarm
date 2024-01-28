@@ -113,6 +113,10 @@ public class FarmObjectManager : MonoSingleton<FarmObjectManager> {
         return plantMap.ContainsKey(sq.Sid) ? plantMap[sq.Sid] : int.MinValue;
     }
 
+    public BasePlantController GetPlant(int id) {
+        return plants.TryGetElement(id);
+    }
+
     public Square PickRandomPlantCoord() {
         if (plantCoords.Count <= 0) return null;
         var index = NumberUtils.RandomInteger(plantCoords.Count - 1);
