@@ -39,7 +39,8 @@ public class FarmPawnManager : MonoSingleton<FarmPawnManager> {
         var po = PrefabUtils.CreatePawn(pn, 0, transform);
         po.transform.position = MapUtils.SquareToWorld(coord);
         var ctrl = po.GetComponent<BasePawnController>();
-        ctrl.SetupIdentifier(PawnIdentifier);
+        ctrl.SetupIdentifier(PawnIdentifier, pn);
+        ctrl.RegisterDestroyCallback(OnPlayerPawnDead);
         pawns[ctrl.Id] = ctrl;
         playerPawns.Add(ctrl.Id);
         playerPawnNameToId[pn] = ctrl.Id;
@@ -57,12 +58,17 @@ public class FarmPawnManager : MonoSingleton<FarmPawnManager> {
         return int.MinValue;
     }
 
+    public BasePawnController GetPlayerPawn(int id) {
+        return pawns.TryGetElement(id);
+    }
+
     public int GenerateEnemyPawn(string pn, Square coord) {
         if (enemyPawnNameToId.ContainsKey(pn)) return enemyPawnNameToId[pn];
         var po = PrefabUtils.CreatePawn(pn, 0, transform);
         po.transform.position = MapUtils.SquareToWorld(coord);
         var ctrl = po.GetComponent<BasePawnController>();
-        ctrl.SetupIdentifier(PawnIdentifier);
+        ctrl.SetupIdentifier(PawnIdentifier, pn);
+        ctrl.RegisterDestroyCallback(OnEnemyPawnDead);
         pawns[ctrl.Id] = ctrl;
         enemyPawns.Add(ctrl.Id);
         enemyPawnNameToId[pn] = ctrl.Id;
@@ -78,5 +84,29 @@ public class FarmPawnManager : MonoSingleton<FarmPawnManager> {
         }
 
         return int.MinValue;
+    }
+
+    public BasePawnController GetEnemyPawn(int id) {
+        return pawns.TryGetElement(id);
+    }
+
+    public BasePawnController GetPawn(int id) {
+        return pawns.TryGetElement(id);
+    }
+
+    private void OnPlayerPawnDead(GameObject po) {
+        var ctrl = po.GetComponent<BasePawnController>();
+        if (ctrl == null) return;
+        pawns.Remove(ctrl.Id);
+        playerPawns.Remove(ctrl.Id);
+        playerPawnNameToId.Remove(ctrl.Name);
+    }
+
+    private void OnEnemyPawnDead(GameObject po) {
+        var ctrl = po.GetComponent<BasePawnController>();
+        if (ctrl == null) return;
+        pawns.Remove(ctrl.Id);
+        enemyPawns.Remove(ctrl.Id);
+        enemyPawnNameToId.Remove(ctrl.Name);
     }
 }

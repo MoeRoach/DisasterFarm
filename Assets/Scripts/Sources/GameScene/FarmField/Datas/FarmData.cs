@@ -36,15 +36,20 @@ public class PawnCommand {
 	public const string CMD_STR_MOVE = "Move";
 	public const string CMD_STR_PLANT = "Plant";
 	public const string CMD_STR_HARVEST = "Harvest";
+	public const string CMD_STR_FOLLOW = "Follow";
 	public const string CMD_STR_ATTACK = "Attack";
 	public const string CMD_STR_HIDE = "Hide";
 	public const string CMD_STR_SHOW = "Show";
+	public const string CMD_STR_DONE = "Done";
 
+	public const string CMD_ARG_KEY_PAWN_IDENTIFIER = "PawnIdentifier";
 	public const string CMD_ARG_KEY_TARGET_POSITION = "TargetPosition";
 	public const string CMD_ARG_KEY_MOVE_SPEED = "MoveSpeed";
 	public const string CMD_ARG_KEY_PLANT_SERIAL = "PlantSerial";
 	public const string CMD_ARG_KEY_PLANT_IDENTIFIER = "PlantIdentifier";
 	public const string CMD_ARG_KEY_TIME_DURATION = "TimeDuration";
+	public const string CMD_ARG_KEY_RUN_AWAY = "RunAway";
+	public const string CMD_ARG_KEY_DONE_CODE = "DoneCode";
 	
 	public string cmd;
 	public Dictionary<string, object> args;
@@ -53,6 +58,10 @@ public class PawnCommand {
 	public PawnCommand(string c) {
 		cmd = c;
 		args = new Dictionary<string, object>();
+	}
+
+	public bool HasArg(string key) {
+		return args.ContainsKey(key);
 	}
 
 	public void PutString(string key, string val) {
