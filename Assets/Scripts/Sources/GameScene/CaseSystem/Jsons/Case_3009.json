@@ -1,12 +1,12 @@
 {
-    "caseId": "3007",
-    "name": "you are a piece of shit!",
+    "caseId": "3009",
+    "name": "bird?airplane?",
     "color": "#DB4142",
     "signal": "Other",
     "timeout": 30,
-    "caseContent": "forg protester want you to join him to cancel this old cow",
-    "image": "Frog",
-    "imageTitle": "Frog",
+    "caseContent": "owl report to you: it is human! they try to attack us! ",
+    "image": "Owl",
+    "imageTitle": "Owl",
     "chooseList": [
         {
             "index": 0,
@@ -17,23 +17,29 @@
         },
         {
             "index": 1,
-            "text": "start protesting",
+            "text": "???",
             "checkList": [],
-            "Pass": [],
+            "Pass": [
+                "DamagerCome_Human"
+            ],
             "Fail": []
         },
         {
             "index": 2,
-            "text": "wait! why do we protesting for?",
+            "text": "!!!",
             "checkList": [],
-            "Pass": [],
+            "Pass": [
+                "DamagerCome_Human"
+            ],
             "Fail": []
         },
         {
             "index": 3,
-            "text": "I am too tired.I will go home first(stop protesting)",
+            "text": "***",
             "checkList": [],
-            "Pass": [],
+            "Pass": [
+                "DamagerCome_Human"
+            ],
             "Fail": []
         }
     ]

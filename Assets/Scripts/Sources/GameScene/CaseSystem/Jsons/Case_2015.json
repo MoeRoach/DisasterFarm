@@ -1,12 +1,12 @@
 {
-    "caseId": "3007",
-    "name": "you are a piece of shit!",
+    "caseId": "2015",
+    "name": "Goat come to steal",
     "color": "#DB4142",
-    "signal": "Other",
+    "signal": "Fight",
     "timeout": 30,
-    "caseContent": "forg protester want you to join him to cancel this old cow",
-    "image": "Frog",
-    "imageTitle": "Frog",
+    "caseContent": "Goat come with bad intentions.",
+    "image": "Goat",
+    "imageTitle": "bad Goat",
     "chooseList": [
         {
             "index": 0,
@@ -17,23 +17,29 @@
         },
         {
             "index": 1,
-            "text": "start protesting",
+            "text": "???",
             "checkList": [],
-            "Pass": [],
+            "Pass": [
+                "ThiefCome_Goat"
+            ],
             "Fail": []
         },
         {
             "index": 2,
-            "text": "wait! why do we protesting for?",
+            "text": "!!!",
             "checkList": [],
-            "Pass": [],
+            "Pass": [
+                "ThiefCome_Goat"
+            ],
             "Fail": []
         },
         {
             "index": 3,
-            "text": "I am too tired.I will go home first(stop protesting)",
+            "text": "***",
             "checkList": [],
-            "Pass": [],
+            "Pass": [
+                "ThiefCome_Goat"
+            ],
             "Fail": []
         }
     ]

@@ -1,0 +1,54 @@
+{
+    "caseId": "2016",
+    "name": "new farmer Rat",
+    "color": "#AB5D52",
+    "signal": "Farm",
+    "timeout": 30,
+    "caseContent": "Here comes a new farmer, a Rat.",
+    "image": "Mouse",
+    "imageTitle": "Rat",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "hire Rat",
+            "checkList": [
+                "Money_>_100"
+            ],
+            "Pass": [
+                "MoneyDown_50",
+                "PoolAdd_2017"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 2,
+            "text": "leave Rat away",
+            "checkList": [],
+            "Pass": [
+                "PoolAdd_2018"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 3,
+            "text": "cook this Rat",
+            "checkList": [
+                "Strength_>_80"
+            ],
+            "Pass": [
+                "CropUp_50",
+                "HPUp_10"
+            ],
+            "Fail": [
+                "HPDown_10"
+            ]
+        }
+    ]
+}

@@ -1,12 +1,12 @@
 {
-    "caseId": "3005",
-    "name": "frog life matter!",
+    "caseId": "3008",
+    "name": "Don't look up",
     "color": "#DB4142",
     "signal": "Other",
     "timeout": 30,
-    "caseContent": "a young forg is protesting: frog life matter!",
-    "image": "Frog",
-    "imageTitle": "Frog",
+    "caseContent": "Don't look up. I saw something weird in the sky",
+    "image": "Owl",
+    "imageTitle": "Owl",
     "chooseList": [
         {
             "index": 0,
@@ -17,30 +17,31 @@
         },
         {
             "index": 1,
-            "text": "join him",
-            "checkList": [],
+            "text": "investigate",
+            "checkList": [
+                "Money_>=_100"
+            ],
             "Pass": [
-                "PoolAdd_3006"
+                "MoneyDown_100",
+                "PoolAdd_3009"
             ],
             "Fail": []
         },
         {
             "index": 2,
-            "text": "all live matter(not join him)",
+            "text": "look up",
             "checkList": [],
             "Pass": [
-                "FameDown_5",
-                "StrengthUp_5",
-                "ThiefCome_Frog"
+                "ListAdd_3009"
             ],
             "Fail": []
         },
         {
             "index": 3,
-            "text": "take a photo with him and post to your amialbook",
+            "text": "you re too anoying!(arrest her))",
             "checkList": [],
             "Pass": [
-                "FameUp_10"
+                "ListAdd_3009"
             ],
             "Fail": []
         }

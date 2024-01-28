@@ -1,0 +1,54 @@
+{
+    "caseId": "2010",
+    "name": "new farmer Capybara",
+    "color": "#AB5D52",
+    "signal": "Farm",
+    "timeout": 30,
+    "caseContent": "Here comes a new farmer, a Capybara.",
+    "image": "Capybara",
+    "imageTitle": "Capybara",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "hire Capybara",
+            "checkList": [
+                "Money_>_100"
+            ],
+            "Pass": [
+                "MoneyDown_50",
+                "PoolAdd_2011"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 2,
+            "text": "leave Capybara away",
+            "checkList": [],
+            "Pass": [
+                "PoolAdd_2012"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 3,
+            "text": "cook this Capybara",
+            "checkList": [
+                "Strength_>_80"
+            ],
+            "Pass": [
+                "CropUp_50",
+                "HPUp_10"
+            ],
+            "Fail": [
+                "HPDown_10"
+            ]
+        }
+    ]
+}

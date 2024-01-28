@@ -1,0 +1,54 @@
+{
+    "caseId": "2013",
+    "name": "new farmer Goat",
+    "color": "#AB5D52",
+    "signal": "Farm",
+    "timeout": 30,
+    "caseContent": "Here comes a new farmer, a Goat.",
+    "image": "Goat",
+    "imageTitle": "Goat",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "hire Goat",
+            "checkList": [
+                "Money_>_100"
+            ],
+            "Pass": [
+                "MoneyDown_50",
+                "PoolAdd_2014"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 2,
+            "text": "leave Goat away",
+            "checkList": [],
+            "Pass": [
+                "PoolAdd_2015"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 3,
+            "text": "cook this Goat",
+            "checkList": [
+                "Strength_>_80"
+            ],
+            "Pass": [
+                "CropUp_50",
+                "HPUp_10"
+            ],
+            "Fail": [
+                "HPDown_10"
+            ]
+        }
+    ]
+}

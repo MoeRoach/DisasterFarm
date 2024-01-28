@@ -37,6 +37,12 @@ public class CaseViewController : MonoSingleton<CaseViewController>
             case SpriteUtils.SPRITE_NAME_COW:
                 AddToPool(2008);
                 break;
+            case SpriteUtils.SPRITE_NAME_CAPYBARA:
+                AddToPool(2011);
+                break;
+            case SpriteUtils.SPRITE_NAME_GOAT:
+                AddToPool(2014);
+                break;
             default:
                 Debug.Log($"AddToPool error");
                 break;
@@ -248,6 +254,11 @@ public class CaseViewController : MonoSingleton<CaseViewController>
             // case issue
             case "ListAdd":
                 Debug.Log($"ListAdd {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    caseManager.CaseList.Add(number);
+                    AddCaseController(number);
+                }
                 break;
             case "PoolAdd":
                 if (int.TryParse(result[1], out number))
