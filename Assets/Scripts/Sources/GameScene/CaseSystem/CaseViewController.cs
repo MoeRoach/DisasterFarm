@@ -43,6 +43,9 @@ public class CaseViewController : MonoSingleton<CaseViewController>
             case SpriteUtils.SPRITE_NAME_GOAT:
                 AddToPool(2014);
                 break;
+            case SpriteUtils.SPRITE_NAME_MOUSE:
+                AddToPool(2017);
+                break;
             default:
                 Debug.Log($"AddToPool error");
                 break;
