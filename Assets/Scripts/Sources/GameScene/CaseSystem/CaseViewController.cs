@@ -16,6 +16,10 @@ public class CaseViewController : MonoBehaviour
     // private int selectIndex;
     [SerializeField] private Transform viewTrans;
     [SerializeField] private CaseManager caseManager;
+    public void AddToPool(int caseId)
+    {
+        caseManager.CasePool.Add(caseId);
+    }
 
     public void ClearView()
     {
@@ -46,8 +50,8 @@ public class CaseViewController : MonoBehaviour
             return;
         }
 
+        Debug.Log(CurrentObj.GetComponent<CaseController>());
         CaseData data = CurrentObj.GetComponent<CaseController>().Data;
-        // Debug.Log(CurrentObj.GetComponent<CaseController>());
         // Debug.Log(data);
         Debug.Log(data.image);
         SpriteUtils.GetCaseImageSprite(data.image);
@@ -89,35 +93,124 @@ public class CaseViewController : MonoBehaviour
         ParseChoose(3);
     }
 
+    bool StringCompare(int value1, string str, int value2)
+    {
+        switch (str)
+        {
+            case ">":
+                return value1 > value2;
+            case ">=":
+                return value1 >= value2;
+            case "<":
+                return value1 < value2;
+            case "<=":
+                return value1 <= value2;
+                break;
+            case "=":
+                return value1 == value2;
+            default:
+                Debug.Log($"StringCompare error");
+                break;
+        }
+        return true;
+    }
+
     void ParseChoose(int index)
     {
         caseManager.CaseList.Remove(CurrentObj.GetComponent<CaseController>().Data.caseId);
 
         string pass = "", fail = "";
-        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[index].Pass)
+        bool isPass = true;
+        int number;
+        foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[index].checkList)
         {
-            pass += str + " ";
-            ParseAction(str);
+            string[] result = str.Split("_");
+            if (result.Length < 3)
+            {
+                Debug.Log("result.Length < 3");
+                return;
+            }
+            else
+            {
+                Debug.Log("checkList is ok");
+            }
+            switch (result[0])
+            {
+                case "Money":
+                    if (int.TryParse(result[2], out number))
+                    {
+                        isPass = StringCompare(PlayerInfo.Money, result[2], number);
+                    }
+                    break;
+                case "HP":
+                    if (int.TryParse(result[2], out number))
+                    {
+                        isPass = StringCompare(PlayerInfo.HP, result[2], number);
+                    }
+                    break;
+                case "Strength":
+                    if (int.TryParse(result[2], out number))
+                    {
+                        isPass = StringCompare(PlayerInfo.Strength, result[2], number);
+                    }
+                    break;
+                case "Crop":
+                    if (int.TryParse(result[2], out number))
+                    {
+                        isPass = StringCompare(PlayerInfo.Crop, result[2], number);
+                    }
+                    break;
+                case "Fame":
+                    if (int.TryParse(result[2], out number))
+                    {
+                        isPass = StringCompare(PlayerInfo.Fame, result[2], number);
+                    }
+                    break;
+                case "Charisma":
+                    if (int.TryParse(result[2], out number))
+                    {
+                        isPass = StringCompare(PlayerInfo.Charisma, result[2], number);
+                    }
+                    break;
+                default:
+
+                    break;
+            }
+            if (!isPass)
+                break;
         }
-        // foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[index].Fail)
-        // {
-        //     fail += str;
-        //     ParseAction(str);
-        // }
+        if (isPass)
+        {
+            foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[index].Pass)
+            {
+                pass += str + " ";
+                ParseAction(str);
+            }
+        }
+        else
+        {
+            foreach (var str in CurrentObj.GetComponent<CaseController>().Data.chooseList[index].Fail)
+            {
+                fail += str;
+                ParseAction(str);
+            }
+        }
+
+
         Debug.Log($"pass:[{pass}],fail:[{fail}]");
     }
 
     public void UpdateFromCaseList()
     {
         Debug.Log($"UpdateFromCaseList");
-        Transform[] childTransforms = gameObject.GetComponentsInChildren<Transform>();
-        if (childTransforms.Length <= 0)
+        if (viewTrans.childCount <= 0)
         {
-            Debug.Log($"childTransforms.Length <= 0");
+            Debug.Log($"viewTrans.childCount <= 0");
             return;
         }
 
-        CurrentObj = childTransforms[0].gameObject;
+        CurrentObj = viewTrans.GetChild(0).gameObject;
+        Debug.Log($"CurrentObj caseId {CurrentObj.GetComponent<CaseController>().Data.caseId}");
         UpdateView();
     }
 
@@ -129,6 +222,7 @@ public class CaseViewController : MonoBehaviour
             Debug.Log("result.Length < 2");
             return;
         }
+        int number;
         switch (result[0])
         {
             // case issue
@@ -136,14 +230,104 @@ public class CaseViewController : MonoBehaviour
                 Debug.Log($"ListAdd {result[1]}");
                 break;
             case "PoolAdd":
-                Debug.Log($"PoolAdd {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    Debug.Log($"PoolAdd {result[1]}");
+                    caseManager.CasePool.Add(number);
+                }
+                else
+                {
+                    Debug.Log($"PoolAdd fail");
+                }
                 break;
             // attributes issue
             case "MoneyUp":
                 Debug.Log($"MoneyUp {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Money += number;
+                }
                 break;
             case "MoneyDown":
                 Debug.Log($"MoneyDown {result[1]}");
+                if (result[1] == "All")
+                {
+                    PlayerInfo.Money = 0;
+                }
+                else if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Money -= number;
+                }
+                break;
+            case "HPUp":
+                Debug.Log($"HPUp {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.HP += number;
+                }
+                break;
+            case "HPDown":
+                Debug.Log($"HPDown {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.HP -= number;
+                }
+                break;
+            case "StrengthUp":
+                Debug.Log($"StrengthUp {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Strength += number;
+                }
+                break;
+            case "StrengthDown":
+                Debug.Log($"StrengthDown {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Strength -= number;
+                }
+                break;
+            case "CropUp":
+                Debug.Log($"CropUp {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Crop += number;
+                }
+                break;
+            case "CropDown":
+                Debug.Log($"CropDown {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Crop -= number;
+                }
+                break;
+            case "FameUp":
+                Debug.Log($"FameUp {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Fame += number;
+                }
+                break;
+            case "FameDown":
+                Debug.Log($"FameDown {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Fame -= number;
+                }
+                break;
+            case "CharismaUp":
+                Debug.Log($"CharismaUp {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Charisma += number;
+                }
+                break;
+            case "CharismaDown":
+                Debug.Log($"CharismaDown {result[1]}");
+                if (int.TryParse(result[1], out number))
+                {
+                    PlayerInfo.Charisma -= number;
+                }
                 break;
             // action issue
             case "GoFarm":

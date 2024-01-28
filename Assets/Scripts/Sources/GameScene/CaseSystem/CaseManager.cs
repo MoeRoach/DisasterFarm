@@ -27,10 +27,23 @@ public class CaseManager : MonoBehaviour
         view.CurrentObj = view.AddCaseController(2000);
         view.UpdateView();
 
+        CaseList.Add(2001);
+        view.AddCaseController(2001);
+        CaseList.Add(3002);
+        view.AddCaseController(3002);
+
         CaseList = new List<int>();
         CasePool = new List<int>();
 
-        InvokeRepeating("RandomCaseFromPoolToList", 10f, 30f);
+        InvokeRepeating("RandomCaseFromPoolToList", 10f, 10f);
+    }
+
+    void Update()
+    {
+        if (view.CurrentObj == null)
+        {
+            view.UpdateFromCaseList();
+        }
     }
 
     void RandomCaseFromPoolToList()

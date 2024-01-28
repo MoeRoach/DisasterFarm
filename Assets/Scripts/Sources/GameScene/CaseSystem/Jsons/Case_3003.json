@@ -1,12 +1,12 @@
 {
-    "caseId": "2001",
-    "name": "new farmer pig",
-    "color": "#AB5D52",
-    "signal": "Farm",
+    "caseId": "3003",
+    "name": "rat need more money",
+    "color": "#DB4142",
+    "signal": "Fight",
     "timeout": 30,
-    "caseContent": "Here comes a new farmer, a pig.",
-    "image": "Pig",
-    "imageTitle": "Pig",
+    "caseContent": "skinny rat come to you agian...",
+    "image": "Mouse",
+    "imageTitle": "rat",
     "chooseList": [
         {
             "index": 0,
@@ -17,37 +17,36 @@
         },
         {
             "index": 1,
-            "text": "hire pig",
+            "text": "what do you do to me last time!(attack)",
             "checkList": [
-                "Money_>_100"
+                "Strength_>=_1"
             ],
             "Pass": [
-                "MoneyDown_50",
-                "PoolAdd_2002"
+                "MoneyUp_50"
             ],
             "Fail": []
         },
         {
             "index": 2,
-            "text": "leave pig away",
+            "text": "give him all your money",
             "checkList": [],
             "Pass": [
-                "PoolAdd_2003"
+                "MoneyDown_All"
             ],
             "Fail": []
         },
         {
             "index": 3,
-            "text": "cook this pig",
+            "text": "a coin artist!I need to be friend with him",
             "checkList": [
-                "Strength_>_80"
+                "Fame_>=_50"
             ],
             "Pass": [
-                "CropUp_50",
-                "HPUp_10"
+                "PoolAdd_3004"
             ],
             "Fail": [
-                "HPDown_10"
+                "MoneyDown_All",
+                "PoolAdd_3003"
             ]
         }
     ]

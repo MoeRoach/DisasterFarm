@@ -1,12 +1,12 @@
 {
     "caseId": "2002",
     "name": "pig go farming",
-    "color": "#F81616",
+    "color": "#AB5D52",
     "signal": "Farm",
     "timeout": 30,
-    "caseContent": "The pig is ready to farming.",
+    "caseContent": "pig go farming.",
     "image": "Pig",
-    "imageTitle": "Pig",
+    "imageTitle": "farmer Pig",
     "chooseList": [
         {
             "index": 0,

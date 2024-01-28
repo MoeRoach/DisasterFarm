@@ -1,12 +1,12 @@
 {
-    "caseId": "2000",
-    "name": "test",
-    "color": "#AB5D52",
-    "signal": "Farm",
+    "caseId": "2003",
+    "name": "pig come to steal",
+    "color": "#DB4142",
+    "signal": "Fight",
     "timeout": 30,
-    "caseContent": "test test test.",
+    "caseContent": "pig come with bad intentions.",
     "image": "Pig",
-    "imageTitle": "Pig",
+    "imageTitle": "bad Pig",
     "chooseList": [
         {
             "index": 0,
@@ -17,25 +17,25 @@
         },
         {
             "index": 1,
-            "text": "GoFarm_Pig",
+            "text": "???",
             "checkList": [],
             "Pass": [
-                "GoFarm_Pig"
+                "ThiefCome_Pig"
             ],
             "Fail": []
         },
         {
             "index": 2,
-            "text": "GoAttack_Pig",
+            "text": "!!!",
             "checkList": [],
             "Pass": [
-                "GoAttack_Pig"
+                "ThiefCome_Pig"
             ],
             "Fail": []
         },
         {
             "index": 3,
-            "text": "ThiefCome_Pig",
+            "text": "***",
             "checkList": [],
             "Pass": [
                 "ThiefCome_Pig"
