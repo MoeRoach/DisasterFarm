@@ -16,7 +16,9 @@ MonoBehaviour:
   - FarmSprites
   - CaseImages
   - CaseSignals
+  - PawnEmojis
   spriteDatabases:
   - {fileID: 11400000, guid: 3df16f09b574d234da1df7f90d147f6e, type: 2}
   - {fileID: 11400000, guid: 0c8c5361ed98b0345a17ed39fae8eff2, type: 2}
   - {fileID: 11400000, guid: 1e7ed17c6e9d24c4e812b50f889956d3, type: 2}
+  - {fileID: 11400000, guid: dc1ed1352f9936342bd8a6181bc2b137, type: 2}

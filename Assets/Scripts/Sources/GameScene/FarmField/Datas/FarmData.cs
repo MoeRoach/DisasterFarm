@@ -28,6 +28,11 @@ public class FarmTile {
 
 public class PawnCommand {
 
+	public const string OP_CMD_GOFARM = "GoFarm";
+	public const string OP_CMD_GOATTACK = "GoAttack";
+	public const string OP_CMD_THIEFCOME = "ThiefCome";
+	public const string OP_CMD_DAMAGERCOME = "DamagerCome";
+
 	public const string CMD_STR_MOVE = "Move";
 	public const string CMD_STR_PLANT = "Plant";
 	public const string CMD_STR_HARVEST = "Harvest";
@@ -106,5 +111,16 @@ public static class PlantConfigs {
 		[PLANT_SERIAL_BUSH] = 3,
 		[PLANT_SERIAL_CARROT] = 1,
 		[PLANT_SERIAL_FRUIT] = 0
+	};
+}
+
+public static class PawnConfigs {
+	public static HashSet<string> PawnNames = new HashSet<string> {
+		PrefabUtils.PREFAB_NAME_PAWN_BULL, PrefabUtils.PREFAB_NAME_PAWN_CAPYBARA,
+		PrefabUtils.PREFAB_NAME_PAWN_COW, PrefabUtils.PREFAB_NAME_PAWN_FROG,
+		PrefabUtils.PREFAB_NAME_PAWN_GOAT, PrefabUtils.PREFAB_NAME_PAWN_HUMAN,
+		PrefabUtils.PREFAB_NAME_PAWN_MOUSE, PrefabUtils.PREFAB_NAME_PAWN_OWL,
+		PrefabUtils.PREFAB_NAME_PAWN_PARROT_KING, PrefabUtils.PREFAB_NAME_PAWN_PARROT_KNIGHT,
+		PrefabUtils.PREFAB_NAME_PAWN_PIG
 	};
 }

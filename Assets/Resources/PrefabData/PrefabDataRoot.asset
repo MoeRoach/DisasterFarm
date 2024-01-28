@@ -15,6 +15,8 @@ MonoBehaviour:
   databaseNames:
   - FarmObjects
   - FarmPlants
+  - FarmPawns
   prefabDatabases:
   - {fileID: 11400000, guid: c362400dcb1cdea41bc0357a160c512c, type: 2}
   - {fileID: 11400000, guid: 67cffcad9d8e1114cbe7eab98cb91225, type: 2}
+  - {fileID: 11400000, guid: 32b847b338f9fb74cbf64195872a20ff, type: 2}

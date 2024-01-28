@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db608fea780b5cb45b8870749bf5e3b0, type: 3}
+  m_Name: ADB_PawnAnims
+  m_EditorClassIdentifier: 
+  databaseName: PawnAnims
+  groupNames:
+  - Bull
+  - Capybara
+  - Cow
+  - Frog
+  - Goat
+  - Human
+  - Mouse
+  - Owl
+  - ParrotKing
+  - ParrotKnight
+  - Pig
+  animaGroups:
+  - groupName: Bull
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: BullAnim
+      animaClip: {fileID: 7400000, guid: 4425bb5635be47d47a4f247eadd109f9, type: 2}
+    isExpanded: 0
+  - groupName: Capybara
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: CapyAnim
+      animaClip: {fileID: 7400000, guid: 746f3f3e9d04f644ab3df666ad42b4a7, type: 2}
+    isExpanded: 0
+  - groupName: Cow
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: CowAnim
+      animaClip: {fileID: 7400000, guid: 7b27b3ecd06595c41996044f4268674f, type: 2}
+    isExpanded: 0
+  - groupName: Frog
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: FrogAnim
+      animaClip: {fileID: 7400000, guid: 719d84a32785c684e8bad2592591abc2, type: 2}
+    isExpanded: 0
+  - groupName: Goat
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: GoatAnim00
+      animaClip: {fileID: 7400000, guid: 4a90839e92f70b746bd5c505fa4bbfe9, type: 2}
+    - dataName: "\u7F16\u53F7(1)"
+      animaName: GoatAnim01
+      animaClip: {fileID: 7400000, guid: 905e4f8cf03cb024e858e707de78bea7, type: 2}
+    isExpanded: 0
+  - groupName: Human
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: HumanAnim
+      animaClip: {fileID: 7400000, guid: c04ef7ae3c6cce1419fea7fbef7173db, type: 2}
+    isExpanded: 0
+  - groupName: Mouse
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: MouseAnim
+      animaClip: {fileID: 7400000, guid: d905b1fc5f9af5846b1de65ce2791593, type: 2}
+    isExpanded: 0
+  - groupName: Owl
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: OwlAnim
+      animaClip: {fileID: 7400000, guid: 2e190a80f19b3944f80c10956bf13b70, type: 2}
+    isExpanded: 0
+  - groupName: ParrotKing
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: ParrotKingAnim
+      animaClip: {fileID: 7400000, guid: 86e8fa8fe67a73d47a5c9f4295237204, type: 2}
+    isExpanded: 0
+  - groupName: ParrotKnight
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: ParrotKnightAnim
+      animaClip: {fileID: 7400000, guid: 91abc95a131e3a74d86ae1f7d976e01d, type: 2}
+    isExpanded: 0
+  - groupName: Pig
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      animaName: PigAnim
+      animaClip: {fileID: 7400000, guid: 7d659a0138a43294e92448545cd91628, type: 2}
+    isExpanded: 0
+  isExpanded: 1
