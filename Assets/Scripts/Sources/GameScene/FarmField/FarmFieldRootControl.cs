@@ -19,14 +19,18 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
     private FarmPawnManager pawnManager;
 
     private Queue<string> operateQueue;
-    
+    private bool isLastOperateDone;
+
+    private List<Square> enemySpawnPoints;
     // --- Test ---
     private List<Square> emptyGrounds;
 
     protected override void OnAwake() {
         base.OnAwake();
+        isLastOperateDone = true;
         emptyGrounds = new List<Square>();
         operateQueue = new Queue<string>();
+        enemySpawnPoints = new List<Square>();
         terrainTilemap = FindComponent<Tilemap>("MapRoot.Terrain");
         groundTilemap = FindComponent<Tilemap>("MapRoot.Ground");
         fieldsTilemap = FindComponent<Tilemap>("MapRoot.Fields");
@@ -43,7 +47,7 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
     }
 
     private void UpdateOperateQueue() {
-        if (operateQueue.Count <= 0) return;
+        if (!isLastOperateDone || operateQueue.Count <= 0) return;
         var op = operateQueue.Dequeue();
         ProcessOperation(op);
     }
@@ -70,20 +74,149 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
         }
     }
 
-    private void DoGoFarm(string pn) {
+    private async void DoGoFarm(string pn) {
+        var entryPoint = new Square(-8, 2);
+        var pid = FarmPawnManager.Instance.GeneratePlayerPawn(pn, entryPoint);
+        if (pid == int.MinValue) return;
+        await UniTask.Yield();
+        var pp = FarmPawnManager.Instance.GetPlayerPawn(pid);
+        var targetList = new List<Square>();
+        var tcount = NumberUtils.RandomInteger(3, 1);
+        for (var i = 0; i < tcount; i++) {
+            var dice = NumberUtils.RandomInteger(99);
+            if (dice > 50) {
+                if (emptyGrounds.Count > 0) {
+                    var index = NumberUtils.RandomInteger(emptyGrounds.Count - 1);
+                    targetList.Add(emptyGrounds[index]);
+                } else {
+                    var pc = FarmObjectManager.Instance.PickRandomPlantCoord();
+                    if (pc == null) break;
+                    targetList.Add(pc);
+                }
+            } else {
+                var pc = FarmObjectManager.Instance.PickRandomPlantCoord();
+                if (pc == null) break;
+                targetList.Add(pc); 
+            }
+        }
+
+        PawnCommand cmd;
+        foreach (var tc in targetList) {
+            cmd = new PawnCommand(PawnCommand.CMD_STR_MOVE);
+            cmd.PutVector3(PawnCommand.CMD_ARG_KEY_TARGET_POSITION, MapUtils.SquareToWorld(tc));
+            cmd.PutFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED, 2f);
+            pp.SendCommand(cmd);
         
+            cmd = new PawnCommand(PawnCommand.CMD_STR_PLANT);
+            var ps = NumberUtils.RandomInteger(3);
+            cmd.PutInteger(PawnCommand.CMD_ARG_KEY_PLANT_SERIAL, ps);
+            cmd.PutFloat(PawnCommand.CMD_ARG_KEY_TIME_DURATION, 2f);
+            pp.SendCommand(cmd);
+        }
+        
+        cmd = new PawnCommand(PawnCommand.CMD_STR_MOVE);
+        cmd.PutVector3(PawnCommand.CMD_ARG_KEY_TARGET_POSITION, MapUtils.SquareToWorld(entryPoint));
+        cmd.PutFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED, 2f);
+        pp.SendCommand(cmd);
+        
+        cmd = new PawnCommand(PawnCommand.CMD_STR_DONE);
+        pp.SendCommand(cmd);
     }
 
-    private void DoGoAttack(string pn) {
+    private async void DoGoAttack(string pn) {
+        var entryPoint = new Square(-8, 2);
+        var pid = FarmPawnManager.Instance.GeneratePlayerPawn(pn, entryPoint);
+        if (pid == int.MinValue) return;
+        await UniTask.Yield();
+        var pp = FarmPawnManager.Instance.GetPlayerPawn(pid);
+        var epid = FarmPawnManager.Instance.PickRandomEnemyPawn();
+        PawnCommand cmd;
+        if (epid != int.MinValue) {
+            cmd = new PawnCommand(PawnCommand.CMD_STR_FOLLOW);
+            cmd.PutInteger(PawnCommand.CMD_ARG_KEY_PAWN_IDENTIFIER, epid);
+            cmd.PutFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED, 2f);
+            pp.SendCommand(cmd);
         
+            cmd = new PawnCommand(PawnCommand.CMD_STR_ATTACK);
+            cmd.PutInteger(PawnCommand.CMD_ARG_KEY_PAWN_IDENTIFIER, epid);
+            pp.SendCommand(cmd);
+        
+            cmd = new PawnCommand(PawnCommand.CMD_STR_MOVE);
+            cmd.PutVector3(PawnCommand.CMD_ARG_KEY_TARGET_POSITION, MapUtils.SquareToWorld(entryPoint));
+            cmd.PutFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED, 2f);
+            pp.SendCommand(cmd);
+        }
+        
+        cmd = new PawnCommand(PawnCommand.CMD_STR_DONE);
+        pp.SendCommand(cmd);
     }
 
-    private void DoThiefCome(string pn) {
+    private async void DoThiefCome(string pn) {
+        var epi = NumberUtils.RandomInteger(enemySpawnPoints.Count - 1);
+        var entryPoint = enemySpawnPoints[epi];
+        var pid = FarmPawnManager.Instance.GenerateEnemyPawn(pn, entryPoint);
+        if (pid == int.MinValue) return;
+        await UniTask.Yield();
+        var ep = FarmPawnManager.Instance.GetEnemyPawn(pid);
+        var targetList = new List<Square>();
+        var tcount = NumberUtils.RandomInteger(3, 1);
+        for (var i = 0; i < tcount; i++) {
+            var pc = FarmObjectManager.Instance.PickRandomPlantCoord();
+            if (pc == null) break;
+            targetList.Add(pc); 
+        }
+
+        PawnCommand cmd;
+        foreach (var tc in targetList) {
+            cmd = new PawnCommand(PawnCommand.CMD_STR_MOVE);
+            cmd.PutVector3(PawnCommand.CMD_ARG_KEY_TARGET_POSITION, MapUtils.SquareToWorld(tc));
+            cmd.PutFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED, 2f);
+            ep.SendCommand(cmd);
+
+            var plant = FarmObjectManager.Instance.GetPlantAtCoord(tc);
+            cmd = new PawnCommand(PawnCommand.CMD_STR_HARVEST);
+            cmd.PutInteger(PawnCommand.CMD_ARG_KEY_PLANT_IDENTIFIER, plant);
+            cmd.PutFloat(PawnCommand.CMD_ARG_KEY_TIME_DURATION, 2f);
+            ep.SendCommand(cmd);
+        }
         
+        cmd = new PawnCommand(PawnCommand.CMD_STR_MOVE);
+        cmd.PutVector3(PawnCommand.CMD_ARG_KEY_TARGET_POSITION, MapUtils.SquareToWorld(entryPoint));
+        cmd.PutFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED, 2f);
+        ep.SendCommand(cmd);
+        
+        cmd = new PawnCommand(PawnCommand.CMD_STR_DONE);
+        ep.SendCommand(cmd);
     }
 
-    private void DoDamagerCome(string pn) {
+    private async void DoDamagerCome(string pn) {
+        var epi = NumberUtils.RandomInteger(enemySpawnPoints.Count - 1);
+        var entryPoint = enemySpawnPoints[epi];
+        var pid = FarmPawnManager.Instance.GenerateEnemyPawn(pn, entryPoint);
+        if (pid == int.MinValue) return;
+        await UniTask.Yield();
+        var ep = FarmPawnManager.Instance.GetEnemyPawn(pid);
+        var ppid = FarmPawnManager.Instance.PickRandomPlayerPawn();
+        PawnCommand cmd;
+        if (ppid != int.MinValue) {
+            cmd = new PawnCommand(PawnCommand.CMD_STR_FOLLOW);
+            cmd.PutInteger(PawnCommand.CMD_ARG_KEY_PAWN_IDENTIFIER, ppid);
+            cmd.PutFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED, 2f);
+            ep.SendCommand(cmd);
         
+            cmd = new PawnCommand(PawnCommand.CMD_STR_ATTACK);
+            cmd.PutInteger(PawnCommand.CMD_ARG_KEY_PAWN_IDENTIFIER, ppid);
+            ep.SendCommand(cmd);
+        
+            cmd = new PawnCommand(PawnCommand.CMD_STR_MOVE);
+            cmd.PutVector3(PawnCommand.CMD_ARG_KEY_TARGET_POSITION, MapUtils.SquareToWorld(entryPoint));
+            cmd.PutInteger(PawnCommand.CMD_ARG_KEY_RUN_AWAY, 1);
+            cmd.PutFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED, 2f);
+            ep.SendCommand(cmd);
+        }
+        
+        cmd = new PawnCommand(PawnCommand.CMD_STR_DONE);
+        ep.SendCommand(cmd);
     }
 
     private async void InitFarm() {
@@ -113,6 +246,20 @@ public class FarmFieldRootControl : MonoSingleton<FarmFieldRootControl> {
             }
         }
 
+        for (var x = -11; x <= 11; x++) {
+            var top = new Square(x, 7);
+            var bot = new Square(x, -7);
+            enemySpawnPoints.Add(top);
+            enemySpawnPoints.Add(bot);
+        }
+
+        for (var y = -6; y <= 6; y++) {
+            var left = new Square(-11, y);
+            var right = new Square(11, y);
+            enemySpawnPoints.Add(left);
+            enemySpawnPoints.Add(right);
+        }
+        
         counter = 0;
         await UniTask.Yield();
         for (var x = -10; x <= 10; x++) {

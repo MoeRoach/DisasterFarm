@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using RoachLite.Basic;
 using RoachLite.Data;
+using RoachLite.Utils;
 using UnityEngine;
 
 public class FarmObjectManager : MonoSingleton<FarmObjectManager> {
@@ -110,6 +111,18 @@ public class FarmObjectManager : MonoSingleton<FarmObjectManager> {
 
     public int GetPlantAtCoord(Square sq) {
         return plantMap.ContainsKey(sq.Sid) ? plantMap[sq.Sid] : int.MinValue;
+    }
+
+    public Square PickRandomPlantCoord() {
+        if (plantCoords.Count <= 0) return null;
+        var index = NumberUtils.RandomInteger(plantCoords.Count - 1);
+        var counter = 0;
+        foreach (var pid in plantCoords.Keys) {
+            if (counter == index) return plantCoords[pid].Clone();
+            counter++;
+        }
+
+        return null;
     }
 
     public bool CheckCoordOccupiedByObject(Square sq) {

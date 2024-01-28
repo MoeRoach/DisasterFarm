@@ -7,11 +7,13 @@ using RoachLite.Data;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
+using Random = UnityEngine.Random;
 
 // Created By Yu.Liu
 public abstract class BasePawnController : BaseObject {
 
 	public int Id { get; protected set; }
+	public string Name { get; protected set; }
 	public virtual Square Coord => MapUtils.WorldToSquare(transform.position);
 	
 	protected SpriteRenderer avatarSprite;
@@ -48,8 +50,22 @@ public abstract class BasePawnController : BaseObject {
 		return AnimationPlayableUtilities.PlayClip(avatarAnimator, clip, out avatarGraph);
 	}
 
-	public void SetupIdentifier(int id) {
+	public void SetupIdentifier(int id, string n) {
 		Id = id;
+		Name = n;
+	}
+
+	public void GetAttack(BasePawnController src) {
+		var last = runnerList.Count > 0 ? runnerList[0] : null;
+		if (last == null) return;
+		if (last.cmd.HasArg(PawnCommand.CMD_ARG_KEY_RUN_AWAY)) return;
+		last.isCanceled = true;
+		while (commandQueue.Count > 0) {
+			var ncmd = commandQueue.Peek();
+			if (!ncmd.HasArg(PawnCommand.CMD_ARG_KEY_RUN_AWAY))
+				commandQueue.Dequeue();
+			else break;
+		}
 	}
 
 	public void SendCommand(PawnCommand cmd) {
@@ -85,6 +101,9 @@ public abstract class BasePawnController : BaseObject {
 			case PawnCommand.CMD_STR_HARVEST:
 				await ExecuteHarvest(runner);
 				break;
+			case PawnCommand.CMD_STR_FOLLOW:
+				await ExecuteFollow(runner);
+				break;
 			case PawnCommand.CMD_STR_ATTACK:
 				await ExecuteAttack(runner);
 				break;
@@ -93,6 +112,9 @@ public abstract class BasePawnController : BaseObject {
 				break;
 			case PawnCommand.CMD_STR_SHOW:
 				await ExecuteShow(runner);
+				break;
+			case PawnCommand.CMD_STR_DONE:
+				await ExecuteDone(runner);
 				break;
 		}
 	}
@@ -139,8 +161,24 @@ public abstract class BasePawnController : BaseObject {
 	
 	protected virtual void DoHarvest(int pid) { }
 
+	protected virtual async UniTask ExecuteFollow(AsyncCommandRunner runner) {
+		var pid = runner.cmd.GetInteger(PawnCommand.CMD_ARG_KEY_PAWN_IDENTIFIER);
+		var po = FarmPawnManager.Instance.GetPawn(pid);
+		var spd = runner.cmd.GetFloat(PawnCommand.CMD_ARG_KEY_MOVE_SPEED);
+		Vector3 offset = Random.insideUnitCircle.normalized * 0.2f;
+		var timer = 0f;
+		var start = transform.position;
+		while (timer < 1f) {
+			timer += Time.deltaTime * spd;
+			transform.position = Vector3.Lerp(start, po.transform.position + offset, timer);
+			await UniTask.Yield();
+			if (runner.isCanceled) return;
+		}
+	}
+
 	protected virtual async UniTask ExecuteAttack(AsyncCommandRunner runner) {
-		var preDelay = 0.2f;
+		var tpid = runner.cmd.GetInteger(PawnCommand.CMD_ARG_KEY_PAWN_IDENTIFIER);
+		var preDelay = 0.1f;
 		var postDelay = 0.2f;
 		var timer = 0f;
 		while (timer < preDelay) {
@@ -149,7 +187,8 @@ public abstract class BasePawnController : BaseObject {
 			if (runner.isCanceled) return;
 		}
 
-		DoAttack();
+		var pawn = FarmPawnManager.Instance.GetPawn(tpid);
+		DoAttack(pawn);
 		while (!CheckAttackDone()) {
 			await UniTask.Yield();
 			if (runner.isCanceled) return;
@@ -162,8 +201,10 @@ public abstract class BasePawnController : BaseObject {
 			if (runner.isCanceled) return;
 		}
 	}
-	
-	protected virtual void DoAttack() { }
+
+	protected virtual void DoAttack(BasePawnController target) {
+		target.GetAttack(this);
+	}
 
 	protected virtual bool CheckAttackDone() {
 		return true;
@@ -182,6 +223,10 @@ public abstract class BasePawnController : BaseObject {
 	}
 	
 	protected virtual void DoShow() { }
+
+	protected virtual async UniTask ExecuteDone(AsyncCommandRunner runner) {
+		await UniTask.Yield();
+	}
 	
 	private async void ExecuteCommand(AsyncCommandRunner runner) {
 		runner.isExecute = true;
@@ -196,6 +241,9 @@ public abstract class BasePawnController : BaseObject {
 
 	protected virtual void OnCommandDone(AsyncCommandRunner runner) {
 		runnerList.Remove(runner);
+		if (runner.cmd.cmd.Equals(PawnCommand.CMD_STR_DONE)) {
+			CaseViewController.Instance.AddToPool(Name);
+		}
 	}
 
 	protected virtual void OnCommandCancel(AsyncCommandRunner runner) {
