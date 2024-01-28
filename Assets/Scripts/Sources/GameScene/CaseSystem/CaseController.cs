@@ -48,13 +48,8 @@ public class CaseController : MonoBehaviour
     {
         Debug.Log($"CaseDataInit:{caseId}");
         ClearInfo();
-        string fileContent = File.ReadAllText(Application.dataPath + $"/Scripts/Sources/GameScene/CaseSystem/Jsons/Case_{caseId}.json");
-        if (string.IsNullOrEmpty(fileContent))
-        {
-            Debug.Log("string.IsNullOrEmpty(fileContent)");
-            return;
-        }
-        Data = JsonUtility.FromJson<CaseData>(fileContent);
+        var fileContent = Resources.Load<TextAsset>($"Jsons/Case_{caseId}");
+        Data = JsonUtility.FromJson<CaseData>(fileContent.text);
         Debug.Log(Data.color);
         ColorUtility.TryParseHtmlString(Data.color, out Color color);
         GetComponent<Image>().color = color;

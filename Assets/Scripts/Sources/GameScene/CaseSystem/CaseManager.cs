@@ -52,7 +52,7 @@ public class CaseManager : MonoBehaviour
         CaseList = new List<int>();
         CasePool = new List<int>();
 
-        InvokeRepeating("RandomCaseFromPoolToList", 10f, 5f);
+        InvokeRepeating("RandomCaseFromPoolToList", 10f, 3f);
     }
 
     void Update()
