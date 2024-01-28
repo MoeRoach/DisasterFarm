@@ -34,8 +34,12 @@ public class CaseManager : MonoBehaviour
         view.AddCaseController(2004);
         CaseList.Add(2007);
         view.AddCaseController(2007);
+
         CaseList.Add(3002);
         view.AddCaseController(3002);
+
+        CaseList.Add(4001);
+        view.AddCaseController(4001);
 
         CaseList = new List<int>();
         CasePool = new List<int>();

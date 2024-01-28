@@ -1,0 +1,50 @@
+{
+    "caseId": "4001",
+    "name": "Parrot King come",
+    "color": "#DB4142",
+    "signal": "Fight",
+    "timeout": 30,
+    "caseContent": "The Parrot King comes to ask for tribute",
+    "image": "Bird",
+    "imageTitle": "Parrot King",
+    "chooseList": [
+        {
+            "index": 0,
+            "text": "time out choose",
+            "checkList": [],
+            "Pass": [],
+            "Fail": []
+        },
+        {
+            "index": 1,
+            "text": "Give Crop",
+            "checkList": [
+                "Crop>=_50"
+            ],
+            "Pass": [
+                "CropDown_50"
+            ],
+            "Fail": [
+                "DamagerCome_Parrot"
+            ]
+        },
+        {
+            "index": 2,
+            "text": "No. You little bird",
+            "checkList": [],
+            "Pass": [
+                "DamagerCome_Parrot"
+            ],
+            "Fail": []
+        },
+        {
+            "index": 3,
+            "text": "???",
+            "checkList": [],
+            "Pass": [
+                "DamagerCome_Parrot"
+            ],
+            "Fail": []
+        }
+    ]
+}

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using RoachLite.Basic;
+using RoachLite.Data;
+using RoachLite.Utils;
 
-public class CaseViewController : MonoBehaviour
+public class CaseViewController : MonoSingleton<CaseViewController>
 {
     public GameObject CurrentObj { get; set; }
     [SerializeField] private Image image;
@@ -54,7 +57,6 @@ public class CaseViewController : MonoBehaviour
         CaseData data = CurrentObj.GetComponent<CaseController>().Data;
         // Debug.Log(data);
         Debug.Log(data.image);
-        SpriteUtils.GetCaseImageSprite(data.image);
         image.sprite = SpriteUtils.GetCaseImageSprite(data.image);
         Debug.Log(image.sprite);
         content.text = data.caseContent;
@@ -105,7 +107,6 @@ public class CaseViewController : MonoBehaviour
                 return value1 < value2;
             case "<=":
                 return value1 <= value2;
-                break;
             case "=":
                 return value1 == value2;
             default:
