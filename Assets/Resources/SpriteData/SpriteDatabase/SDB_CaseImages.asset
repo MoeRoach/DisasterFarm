@@ -21,6 +21,11 @@ MonoBehaviour:
   - Hat
   - Mouse
   - Witch
+  - Owl
+  - Goat
+  - Frog
+  - Capybara
+  - Bull
   spriteGroups:
   - groupName: Pig
     groupData:
@@ -38,7 +43,7 @@ MonoBehaviour:
     groupData:
     - dataName: "\u7F16\u53F7(0)"
       spriteName: cow
-      spriteObject: {fileID: 21300000, guid: 139c56dc5425a2043a8a3ac017c7357c, type: 3}
+      spriteObject: {fileID: 21300000, guid: d3079cf7a213be24689e727b940407bc, type: 3}
     isExpanded: 0
   - groupName: Grass
     groupData:
@@ -63,5 +68,35 @@ MonoBehaviour:
     - dataName: "\u7F16\u53F7(0)"
       spriteName: witch
       spriteObject: {fileID: 21300000, guid: 5bda8de2d172f424a8c48e5c173b179e, type: 3}
+    isExpanded: 0
+  - groupName: Owl
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: owl
+      spriteObject: {fileID: 21300000, guid: ad9e69f03e280f84e89a13e69039defc, type: 3}
+    isExpanded: 0
+  - groupName: Goat
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: goat
+      spriteObject: {fileID: 21300000, guid: 57dbd2217725f19409e9dd0d465ba2d0, type: 3}
+    isExpanded: 0
+  - groupName: Frog
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: frog
+      spriteObject: {fileID: 21300000, guid: df1254008f4751c4399b21882f81d958, type: 3}
+    isExpanded: 0
+  - groupName: Capybara
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: capybara
+      spriteObject: {fileID: 21300000, guid: 51089a688c62e4e4ca3def3bb1ea18e8, type: 3}
+    isExpanded: 0
+  - groupName: Bull
+    groupData:
+    - dataName: "\u7F16\u53F7(0)"
+      spriteName: bull
+      spriteObject: {fileID: 21300000, guid: 139c56dc5425a2043a8a3ac017c7357c, type: 3}
     isExpanded: 0
   isExpanded: 1

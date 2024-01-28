@@ -29,7 +29,7 @@ MonoBehaviour:
     groupData:
     - dataName: "\u7F16\u53F7(0)"
       spriteName: farm
-      spriteObject: {fileID: 21300000, guid: 898a0c5ae03abcc48977382aa3740010, type: 3}
+      spriteObject: {fileID: 21300000, guid: 6a64788bf291b204896b9d394b527ea2, type: 3}
     isExpanded: 0
   - groupName: Fight
     groupData:
@@ -41,6 +41,6 @@ MonoBehaviour:
     groupData:
     - dataName: "\u7F16\u53F7(0)"
       spriteName: other
-      spriteObject: {fileID: 21300000, guid: 6a64788bf291b204896b9d394b527ea2, type: 3}
+      spriteObject: {fileID: 21300000, guid: 898a0c5ae03abcc48977382aa3740010, type: 3}
     isExpanded: 0
   isExpanded: 1

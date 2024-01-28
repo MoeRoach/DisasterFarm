@@ -21,6 +21,11 @@ public static class SpriteUtils {
 	public const string SPRITE_NAME_HAT = "Hat";
 	public const string SPRITE_NAME_MOUSE = "Mouse";
 	public const string SPRITE_NAME_WITCH = "Witch";
+	public const string SPRITE_NAME_OWL = "Owl";
+	public const string SPRITE_NAME_GOAT = "Goat";
+	public const string SPRITE_NAME_FROG = "Frog";
+	public const string SPRITE_NAME_CAPYBARA = "Capybara";
+	public const string SPRITE_NAME_BULL = "Bull";
 
 	public const string SPRITE_NAME_HIRE = "Hire";
 	public const string SPRITE_NAME_FARM = "Farm";
